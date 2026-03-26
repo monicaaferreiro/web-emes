@@ -1,0 +1,190 @@
+:root {
+    --clr-corporativo-purple: hsl(328, 73%, 23%);
+    --clr-corporativo-blue: hsl(212, 50%, 65%);
+    --clr-corporativo-yellow: hsl(55, 88%, 84%);
+    --clr-corporativo-orange: hsl(26, 91%, 79%);
+    --clr-black: hsl(0, 0%, 0%);
+    /* para darle altura fija al nav */
+    --nav-height: 60px;
+    --title-font-playfair: 'Playfair Display', serif;
+    --title-font-excon: 'Excon', sans-serif;
+    --text-font-inter: 'Inter', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--text-font-inter);
+    overflow-x: hidden;
+}
+
+/* Ocultar el texto del logo pero mantenerlo para SEO */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* --- HEADER Y NAV --- */
+.nav-container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: var(--nav-height);
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.logo-img {
+    height: 30px;
+}
+
+/* Ocultamos el checkbox físicamente */
+.menu-checkbox {
+    display: none;
+}
+
+/* --- ICONO HAMBURGUESA --- */
+.nav__burguer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 1100;
+    position: relative;
+}
+
+.nav__burguer span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background: var(--clr-corporativo-purple);
+    transition: 0.3s;
+}
+
+/* --- OVERLAY MÓVIL --- */
+.menu__overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--clr-corporativo-yellow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(100%);
+    /* Escondido arriba */
+    transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: 900;
+}
+
+.menu__overlay_nav_list {
+    list-style: none;
+    text-align: center;
+}
+
+.menu__overlay_nav_list a {
+    display: block;
+    padding: 15px;
+    font-size: 2rem;
+    color: var(--clr-black);
+    text-decoration: none;
+    font-family: var(--font-excon);
+    font-weight: bold;
+}
+
+.menu__footer {
+    margin-top: auto;
+    /* Empuja el footer hacia abajo si el menú es corto */
+    padding-bottom: 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+    .social-icons a {
+    color: var(--clr-purple);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+    .social-icons a:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+    .copyright {
+    font-family: var(--font-inter);
+    font-size: 0.8rem;
+    color: var(--clr-purple);
+    font-weight: 500;
+}
+
+/* --- LÓGICA DE ACTIVACIÓN (Sustituye a JS) --- */
+
+/* 1. Cuando el input está checked, movemos el overlay */
+.menu-checkbox:checked~.menu__overlay {
+    transform: translateY(0);
+}
+
+/* 2. Animamos las rayas para que formen una X */
+.menu-checkbox:checked~.nav__burguer span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.menu-checkbox:checked~.nav__burguer span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-checkbox:checked~.nav__burguer span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* --- RESPONSIVE / DESKTOP --- */
+.header__menu {
+    display: none;
+}
+
+/* Escondido en móvil */
+
+@media (min-width: 768px) {
+
+    .nav__burguer,
+    .menu__overlay {
+        display: none;
+    }
+
+    .header__menu {
+        display: block;
+    }
+
+    .header__menu_list {
+        display: flex;
+        gap: 25px;
+        list-style: none;
+    }
+
+    .header__menu_list a {
+        text-decoration: none;
+        color: var(--clr-black);
+        font-weight: 500;
+    }
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emes Agencia Creativa</title>
+    <!-- Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+    <!-- Excon variable -->
+    <link href="https://api.fontshare.com/v2/css?f[]=excon@1,2&display=swap" rel="stylesheet">
+    <!-- Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Domine:wght@400..700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+Mono:wght@100..900&family=Petit+Formal+Script&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+AT:ital,wght@0,100..400;1,100..400&family=Ysabeau+SC:wght@1..1000&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="nav-container">
+            <h1 class="header__logo">
+            <!-- los aria-label sirven para que los lectores de código tengan más info sobre el html semántico -->
+                <a href="#" aria-label="Emes Agencia Creativa - inicio">
+                    <img src="assets/logo-emes-morado.svg" alt="logo" class="logo-img">
+                    <span class="visually-hidden">Emes Agencia Creativa</span>
+                </a>
+            </h1>
+
+            <input type="checkbox" id="menu-toggle" class="menu-checkbox">
+
+        <!-- Estos span vacios son las 3 rayas del menú hamburguesa -->
+            <label for="menu-toggle" class="nav__burguer" aria-label="Abrir menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+        
+        <!-- NAV DESKTOP (pantallas grandes = >768px) -->
+            <div class="header__menu">
+                <ul class="header__menu_list">
+                    <li><a href="la-agencia/index.html">La agencia</a></li>
+                    <li><a href="proyectos/index.html">Proyectos</a></li>
+                    <li><a href="servicios/index.html">Servicios</a></li>
+                    <li><a href="contacto/index.html">¿Hablamos?</a></li>
+                </ul>
+            </div>
+
+        <!-- OVERLAY MENÚ HAMBURGUESA-->
+        <!-- role="dialog" le indica al navegador que esto es una capa que aparece encima del contenido -->
+        <!-- aria-modal="true" le indica al navegador que cuando el menú esté abierto solo lea eso y no el resto de la página  -->
+            <div class="menu__overlay">
+                <nav class="menu__overlay_nav">
+                    <ul class="menu__overlay_nav_list">
+                        <li><a href="la-agencia/index.html">La agencia</a></li>
+                        <li><a href="proyectos/index.html">Proyectos</a></li>
+                        <li><a href="servicios/index.html">Servicios</a></li>
+                        <li><a href="contacto/index.html">¿Hablamos?</a></li>
+                    </ul>
+                </nav>
+                <div class="menu__footer">
+                    <img src="assets/logo-mm-contorno.svg" alt="Logo contorno" class="menu__footer_logo">
+                    
+                    <div class="social-icons">
+                        <a href="#" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                            </svg></a>
+                
+                        <a href="#" aria-label="TikTok"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+                            </svg></a>
+                
+                        <a href="#" aria-label="YouTube"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17Z" />
+                                <path d="m10 15 5-3-5-3z" />
+                            </svg></a>
+                
+                        <a href="#" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                <rect width="4" height="12" x="2" y="9" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg></a>
+                    </div>
+                
+                    <p class="copyright">© Emes Agencia Creativa</p>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    
+
+</body>
+
+</html>
