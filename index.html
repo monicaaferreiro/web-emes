@@ -25,7 +25,7 @@
 <body>
 
     <header class="header">
-        <nav class="nav-container">
+        <nav class="nav-container" id="main-nav">
             <h1 class="header__logo">
             <!-- los aria-label sirven para que los lectores de código tengan más info sobre el html semántico -->
                 <a href="#" aria-label="Emes Agencia Creativa - inicio">
@@ -56,7 +56,12 @@
         <!-- OVERLAY MENÚ HAMBURGUESA-->
         <!-- role="dialog" le indica al navegador que esto es una capa que aparece encima del contenido -->
         <!-- aria-modal="true" le indica al navegador que cuando el menú esté abierto solo lea eso y no el resto de la página  -->
-            <div class="menu__overlay">
+    <div class="menu__overlay">
+   <div class="menu__overlay_header"> 
+<div class="menu__overlay_header">
+    <img src="assets/logo-emes-contorno.svg" alt="logo Emes" class="menu__overlay_logo menu__overlay_logo--solid">
+</div>
+   </div>
                 <nav class="menu__overlay_nav">
                     <ul class="menu__overlay_nav_list">
                         <li><a href="la-agencia/index.html">La agencia</a></li>
@@ -65,39 +70,18 @@
                         <li><a href="contacto/index.html">¿Hablamos?</a></li>
                     </ul>
                 </nav>
+
+                <!-- el aria laber es para darle más info al lector de pantalla -->
+
                 <div class="menu__footer">
                     <img src="assets/logo-mm-contorno.svg" alt="Logo contorno" class="menu__footer_logo">
                     
                     <div class="social-icons">
-                        <a href="#" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-                            </svg></a>
+                        <a href="#" aria-label="Instagram"><img src="assets/instagram.svg" width="22" height="22 " alt="Icono de Instagram"></a>
                 
-                        <a href="#" aria-label="TikTok"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
-                            </svg></a>
+                        <a href="#" aria-label="TikTok"><img src="assets/tiktok.svg" width="20" height="23" alt="Icono de TikTok"></a>
                 
-                        <a href="#" aria-label="YouTube"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path
-                                    d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17Z" />
-                                <path d="m10 15 5-3-5-3z" />
-                            </svg></a>
-                
-                        <a href="#" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                                <rect width="4" height="12" x="2" y="9" />
-                                <circle cx="4" cy="4" r="2" />
-                            </svg></a>
+                        <a href="#" aria-label="LinkedIn"><img src="assets/linkedin.svg" width="22" height="22 " alt="Icono de LinkedIn"></a>
                     </div>
                 
                     <p class="copyright">© Emes Agencia Creativa</p>
@@ -106,8 +90,52 @@
         </nav>
     </header>
 
-    
 
+<footer class="footer">
+<!-- hacemos dos columnas para facilitar el diseño -->
+ <div class="footer__left">
+    <div class="footer__brand-group">
+    <!-- aria-hidden="true" porque es decorativo — el copyright ya identifica la marca, no hace falta que el lector de pantalla lo lea dos veces  -->
+    <img src="assets/logo-mm-contorno.svg" alt="" class="footer__logo" aria-hidden="true">
+    <p class="footer__copy">© Emes Agencia Creativa</p>
+    </div>
+ </div>
+
+ <div class="footer__right">
+<div class="footer__contact-group">
+    <!-- fila de iconos sociales -->
+     <div class="footer__social">
+        <a href="#" aria-label="Instagram"><img src="assets/instagram.svg" width="22" height="22 " alt="Icono de Instagram"></a>
+        
+        <a href="#" aria-label="TikTok"><img src="assets/tiktok.svg" width="20" height="23" alt="Icono de TikTok"></a>
+        
+        <a href="#" aria-label="LinkedIn"><img src="assets/linkedin.svg" width="22" height="22 " alt="Icono de LinkedIn"></a>
+     </div>
+
+    <a href="mailto:hola@emesagenciacreativa.com" class="footer__email">hola@emesagenciacreativa.com</a>
+    </div>
+
+    <!-- nav semántico para los links legales, usamos nav porque es un grupo de enlaces de navegación pero se diferencia del nav principal del header con aria label-->
+    <nav class="footer__legal" aria-label="Enlaces legales">
+        <a href="#">Política de cookies</a>
+        <a href="#">Política de privacidad</a>
+        <a href="#">Aviso legal</a>
+    </nav>
+ </div>
+</footer>
+    
+<script>
+// TRANSPARENCIA PARA EL HEADER AL HACER SCROLL (SOLO EN MÓVIL)
+const nav = document.getElementById('main-nav');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 10) {
+            nav.classList.add('nav--scrolled');
+        } else {
+            nav.classList.remove('nav--scrolled');
+        }
+    });
+</script>
 </body>
 
 </html>
