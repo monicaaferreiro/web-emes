@@ -1,0 +1,237 @@
+/* =============================================
+   SERVICIOS — CSS específico de la página
+   Complementa estilo.css (variables y componentes globales)
+   ============================================= */
+
+/* HERO */
+.servicios-hero {
+    padding-top: var(--nav-height);
+    padding: calc(var(--nav-height) + clamp(40px, 8vh, 80px)) var(--padding-movil) clamp(30px, 6vh, 60px);
+    text-align: right;
+}
+
+.servicios-hero__subtitulo {
+    font-family: var(--title-font-excon);
+    font-size: var(--text-size-title-excon);
+    font-weight: 400;
+}
+
+.servicios-hero__titulo {
+    font-family: var(--title-font-playfair);
+    font-size: var(--text-size-title-playfairdisplay);
+    font-style: italic;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* =============================================
+   LISTA DE SERVICIOS — MÓVIL FIRST
+   ============================================= */
+
+.servicios-main {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(40px, 10vh, 80px);
+    padding: clamp(20px, 5vh, 40px) var(--padding-movil);
+}
+
+/* Cada servicio: icono + texto en fila */
+.servicio-detalle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: clamp(16px, 4vw, 30px);
+
+    /* Estado inicial para la animación — icono viene de la izquierda */
+    opacity: 0;
+    transform: translateX(0);
+    /* se sobreescribe por JS añadir clase visible */
+}
+
+/* El icono arranca fuera por la izquierda */
+.servicio-detalle__icono {
+    flex-shrink: 0;
+    width: clamp(110px, 38vw, 200px);
+    transform: translateX(-40px);
+    opacity: 0;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.6s ease;
+}
+
+.servicio-detalle__icono svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* El texto arranca fuera por la derecha */
+.servicio-detalle__texto {
+    transform: translateX(40px);
+    opacity: 0;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.1s,
+        opacity 0.6s ease 0.1s;
+}
+
+/* Servicio invertido: icono a la derecha, texto a la izquierda */
+.servicio-detalle--invertido {
+    flex-direction: row-reverse;
+}
+
+/* Para invertidos el icono viene de la derecha */
+.servicio-detalle--invertido .servicio-detalle__icono {
+    transform: translateX(40px);
+}
+
+/* Para invertidos el texto viene de la izquierda */
+.servicio-detalle--invertido .servicio-detalle__texto {
+    transform: translateX(-40px);
+}
+
+/* Cuando el JS añade .visible — todo entra */
+.servicio-detalle.visible .servicio-detalle__icono,
+.servicio-detalle.visible .servicio-detalle__texto {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* TEXTOS DEL SERVICIO */
+.servicio-detalle__nombre {
+    font-family: var(--title-font-playfair);
+    font-size: clamp(1.4rem, 5vw, 2rem);
+    font-style: italic;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--clr-corporativo-purple);
+}
+
+.servicio-detalle__tagline {
+    font-family: var(--text-font-inter);
+    font-size: clamp(0.85rem, 3vw, 1rem);
+    color: var(--clr-black);
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.servicio-detalle__tagline em {
+    font-style: italic;
+    font-weight: 700;
+}
+
+.servicio-detalle__lista {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.servicio-detalle__lista li {
+    font-family: var(--text-font-inter);
+    font-size: clamp(0.75rem, 2.8vw, 0.9rem);
+    color: hsl(0, 0%, 40%);
+}
+
+/* =============================================
+   CTA FINAL
+   ============================================= */
+
+.servicios-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(20px, 4vh, 30px);
+    padding: clamp(40px, 8vh, 80px) var(--padding-movil);
+    text-align: center;
+}
+
+.servicios-cta__texto {
+    font-family: var(--title-font-excon);
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* =============================================
+   DESKTOP — @media (min-width: 768px)
+   ============================================= */
+
+@media (min-width: 768px) {
+
+    .servicios-hero {
+        padding: calc(var(--nav-height) + clamp(60px, 10vh, 100px)) var(--padding-desktop) clamp(40px, 6vh, 60px);
+    }
+
+    /* En desktop: grid de 2 columnas para los servicios */
+    .servicios-main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(40px, 6vh, 80px) clamp(20px, 4vw, 60px);
+        padding: clamp(20px, 4vh, 40px) var(--padding-desktop);
+        align-items: start;
+    }
+
+    /* Cada servicio ocupa una celda, flex en columna (icono arriba, texto abajo) */
+    .servicio-detalle {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: clamp(12px, 2vh, 20px);
+    }
+
+    /* Los invertidos también van en columna en desktop — la alternancia la da el grid */
+    .servicio-detalle--invertido {
+        flex-direction: column;
+    }
+
+    /* El 5º servicio (último, impar) se centra en la segunda fila solo */
+    .servicio-detalle:last-child {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        align-items: center;
+        max-width: 600px;
+        margin: 0 auto;
+        gap: clamp(24px, 4vw, 48px);
+    }
+
+    /* En desktop el icono tiene ancho mayor */
+    .servicio-detalle__icono {
+        width: clamp(160px, 22vw, 280px);
+    }
+
+    /* El nombre más grande en desktop */
+    .servicio-detalle__nombre {
+        font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+    }
+
+    .servicio-detalle__tagline {
+        font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    }
+
+    .servicio-detalle__lista li {
+        font-size: clamp(0.85rem, 1vw, 1rem);
+    }
+
+    /* Animaciones corregidas para desktop — vienen de abajo */
+    .servicio-detalle__icono {
+        transform: translateY(-30px);
+    }
+
+    .servicio-detalle__texto {
+        transform: translateY(30px);
+        transition-delay: 0.15s;
+    }
+
+    /* El último servicio conserva el slide lateral */
+    .servicio-detalle:last-child .servicio-detalle__icono {
+        transform: translateX(-40px);
+    }
+
+    .servicio-detalle:last-child .servicio-detalle__texto {
+        transform: translateX(40px);
+    }
+
+    /* Estado visible — reset de transforms */
+    .servicio-detalle.visible .servicio-detalle__icono,
+    .servicio-detalle.visible .servicio-detalle__texto {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+}

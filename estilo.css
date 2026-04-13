@@ -9,19 +9,44 @@
     --title-font-playfair: 'Playfair Display', serif;
     --title-font-excon: 'Excon', sans-serif;
     --text-font-inter: 'Inter', sans-serif;
-    --text-size-text: clamp(1.125rem, 0.863rem + 1.066vw, 1.5625rem);
+    --text-size-text: clamp(1.125rem, 0.863rem + 1.066vw, 1.1625rem);
     --text-size-title-excon: clamp(1.125rem, 0.374rem + 3.056vw, 3.125rem);
     --text-size-title-playfairdisplay: clamp(1.5rem, 0.163rem + 5.443vw, 5.0625rem);
     --text-size-title-playfairdisplay-entre-excon: clamp(1.125rem, 0.374rem + 3.056vw, 3.125rem);
     --text-size-copyright: clamp(1rem, 0.906rem + 0.382vw, 1.25rem);
 
-    --padding-web: 2vw; /* Límites retícula */
+    --padding-movil: 5vw; /* Límites retícula */
+    --padding-desktop: 2vw;
+        /* Límites retícula */
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+.btn {
+    display: inline-block;
+    align-self: center;
+    white-space: nowrap;
+    text-decoration: none;
+    cursor: pointer;
+    padding: clamp(10px, 1.3vw, 15px) clamp(40px, 4.2vw, 60px);
+    border-radius: 42px;
+    background: var(--clr-corporativo-purple);
+    color: var(--clr-corporativo-yellow);
+    font-family: var(--text-font-inter);
+    font-size: var(--text-size-text);
+    font-weight: 600;
+    border: 2px solid transparent;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn:hover {
+    background: var(--clr-corporativo-yellow);
+    color: var(--clr-corporativo-purple);
+    border-color: var(--clr-corporativo-purple);
 }
 
 body {
@@ -51,9 +76,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+    padding:var(--padding-movil);
     z-index: 1000;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .logo-img {
@@ -85,14 +109,15 @@ body {
 
 /* transparencia en el header al hacer scroll */
 .nav--scrolled {
-    background: hsla(0, 0%, 100%, 0.85);
-    backdrop-filter: blur(8px);
+    background: hsla(0, 0%, 100%, 0.5);
+    backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(8px);
     transition: background 0.3s ease;
 }
 
 /* --- OVERLAY MÓVIL --- */
 .menu__overlay {
+    
     position: fixed;
     inset: 0;
     background: var(--clr-corporativo-yellow);
@@ -108,7 +133,7 @@ body {
     transform: translateX(100%);
     /* Escondido arriba */
     transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-    z-index: 900;
+    z-index: 999; /* por debajo del nav*/
     gap: clamp(20px, 6vh, 60px); /* un solo gap continuo para todo */
 }
 
@@ -121,7 +146,7 @@ body {
     /* así el logo queda visualmente a la misma línea que la X */
 }
 
-.menu__overlay_logo {
+.menu__overlay_emes-logo {
     height: 30px;
     /* igual que tu .logo-img */
     width: auto;
@@ -143,41 +168,42 @@ body {
     padding: 0; /* sin padding extra que rompa la proporción */
 }
 
-.menu__footer {
+.menu__overlay_footer {
     margin-top: auto;
     gap: clamp(10px, 2vh, 20px); /* gap interno del footer que escala */
     padding-bottom: clamp(20px, 4vh, 40px);
     align-items: center;
     display: flex;
     flex-direction: column;
-
-    .menu__footer_logo {
-            width: clamp(280px, 91.6vw, 700px);
-            height: auto;
-            display: block; /* evita el espacio baseline de las imágenes inline */
-        }
 }
 
-.social-icons {
+.logo-mm-contorno__footer {
+    width: clamp(280px, 91.6vw, 700px);
+    height: auto;
+    display: block;
+    /* evita el espacio baseline de las imágenes inline */
+}
+
+.footer__social-icons {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
 }
 
-.social-icons svg {
+.footer__social-icons svg {
     width: clamp(20px, 5vw, 28px);
     height: clamp(20px, 5vw, 28px);
 }
 
-    .social-icons a {
+.footer__social-icons a {
     display: flex;
     align-items: center;
     color: var(--clr-corporativo-purple);
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-    .copyright {
+.footer__copyright {
     font-family: var(--text-font-inter);
     font-size: 0.8rem;
     color: var(--clr-black);
@@ -204,6 +230,10 @@ body {
 .menu-checkbox:checked~.nav__burguer span:nth-child(3) {
     transform: translateY(-7px) rotate(-45deg);
 }
+
+.menu-checkbox:checked~.menu__overlay {
+    overflow: hidden;
+}
 /* --- OVERLAY MÓVIL --- */
 
 /* --- RESPONSIVE / DESKTOP --- */
@@ -222,6 +252,7 @@ body {
     width: 100%;
     height: 100vh;
     overflow: hidden;
+    z-index: 0;
 }
 
 .hero__img {
@@ -241,6 +272,263 @@ body {
 }
 /* IMAGEN HERO */
 
+/* SERVICIOS */
+.seccion-servicios {
+    padding: clamp(30px, 8vh, 40px) var(--padding-movil);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(10px, 6vh, 60px);
+}
+
+.servicios__header {
+    text-align: right;
+}
+
+.servicios__titulo1 {
+    font-family: var(--title-font-excon);
+    font-size: var(--text-size-title-excon);
+    font-weight: 400;
+}
+
+.servicios__titulo2 {
+    font-family: var(--title-font-playfair);
+    font-size: var(--text-size-title-playfairdisplay);
+    font-style: italic;
+    font-weight: 700;
+}
+
+.servicios__lista {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 5vh, 50px);
+}
+
+.servicio {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+/* los servicios alternos tienen el texto a la izquierda y el icono a la derecha */
+.servicio--derecha {
+    flex-direction: row-reverse;
+}
+
+.servicio__icono {
+    flex-shrink: 0;
+    width: clamp(140px, 45vw, 220px);
+}
+
+.servicio__icono svg {
+    width: 100%;
+    height: auto;
+}
+
+/* el texto empieza oculto y aparece con scroll */
+.servicio__texto {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* para los servicios alternos el texto viene desde la derecha */
+.servicio--derecha .servicio__texto {
+    transform: translateX(20px);
+}
+
+/* clase que añade el JS cuando el elemento entra en pantalla */
+.servicio__texto.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.servicio__cta {
+    font-family: var(--title-font-excon);
+    font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.servicio__descripcion {
+    font-family: var(--text-font-inter);
+    font-size: clamp(0.75rem, 3vw, 0.9rem);
+    color: hsl(0, 0%, 40%);
+}
+
+.seccion-servicios .btn {
+    align-self: center;
+}
+
+/* SECCIÓN PROYECTOS */
+
+.seccion-proyectos {
+    padding: clamp(30px, 8vh, 40px) 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(10px, 6vh, 60px);
+    overflow: hidden;
+}
+
+.proyectos__header {
+    text-align: center;
+    padding: 0 var(--padding-movil);
+}
+
+.proyectos__titulo1 {
+    font-family: var(--title-font-excon);
+    font-size: var(--text-size-title-excon);
+    font-weight: 400;
+}
+
+.proyectos__titulo2 {
+    font-family: var(--title-font-playfair);
+    font-size: var(--text-size-title-playfairdisplay);
+    font-style: italic;
+    font-weight: 700;
+}
+
+/* position:relative para anclar las flechas absolutas.
+   overflow:hidden recorta lo que se sale del slider */
+.proyectos__slider-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    /* en móvil permite deslizar con el dedo */
+    touch-action: pan-x;
+}
+
+/* Fila de tarjetas. El JS cambia translateX
+   y este transition anima ese cambio */
+.proyectos__slider {
+    display: flex;
+    gap: 10px;
+    transition: transform 0.5s ease;
+    /* Avisa al navegador que este elemento se va a animar
+       para que lo optimice en GPU */
+    will-change: transform;
+}
+
+/* flex-shrink:0 impide que las tarjetas se encojan.
+   flex-direction:column apila imagen arriba y texto abajo */
+.proyecto {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    width: clamp(260px, 60vw, 320px);
+    /* espacio entre imagen y texto */
+}
+
+/* Wrapper de la imagen: position:relative para el zoom,
+   overflow:hidden para recortarlo */
+.proyecto__imagen-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4; /* proporciones sin fijar altura */
+    overflow: hidden;
+    border-radius: 10px;
+    
+}
+
+/* La imagen rellena el wrapper sin deformarse */
+.proyecto__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease; /* para el zoom en hover desktop */
+}
+
+/* Texto debajo de la imagen en móvil empieza oculto y aparece con scroll (JS) */
+.proyecto__info {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(8px, 1.5vw, 16px) var(--padding-movil) 0;
+    gap: 10px;
+}
+.proyecto__nombre {
+    font-family: var(--text-font-inter);
+    font-size: clamp(1.2rem, 5vw, 1.5rem);
+    font-weight: 700;
+    color: var(--clr-black);
+}
+
+.proyecto__descripcion {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--text-font-inter);
+    font-size: var(--text-size-text);
+    color: var(--clr-black);
+    gap: 4px;
+}
+
+/* flechas del slider desktop */
+.proyectos__flecha {
+    display: none;
+}
+/* SECCIÓN PROYECTOS */
+
+/* FOOTER MÓVIL */
+.footer-desktop {
+    display: none;
+}
+
+.footer-mobile {
+    background: var(--clr-corporativo-yellow);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: var(--nav-height) 0 0 0;
+    gap: 0;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-mobile__bottom {
+    margin-top: auto;
+    gap: clamp(10px, 2vh, 20px);
+    padding-bottom: clamp(20px, 4vh, 40px);
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.footer-mobile__top {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(20px, 5vh, 40px) var(--padding-movil);
+    gap: clamp(300px, 8vh, 60px);
+    width: 100%;
+    font-family: var(--text-font-inter);
+    font-weight: 500;
+}
+
+.footer-mobile__email {
+    color: var(--clr-black);
+    text-decoration: none;
+    font-size: var(--text-size-text);
+    align-self: flex-start; /* pegado a la izquierda */
+}
+
+
+.footer-mobile__legal {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* pegado a la derecha */
+    align-self: flex-end; /* el bloque entero a la derecha */
+    gap: 20px;
+    text-decoration: none;
+    font-size: var(--text-size-text);
+}
+
+.footer-mobile__legal a {
+    color: var(--clr-black);
+    text-decoration: none;
+    text-align: right;
+}
+/* FOOTER MÓVIL */
+
 /* RESPONSIVE: DESKTOP */
 /* Escondido en móvil */
 @media (min-width: 768px) {
@@ -252,6 +540,10 @@ body {
 
     .header__menu {
         display: block;
+    }
+
+    .footer-mobile {
+        display: none;
     }
 
     .header__menu_list {
@@ -310,8 +602,144 @@ body {
         display: block;
     }
 
+/* SECCIÓN SERVICIOS DESKTOP */
+
+    .servicios {
+        padding: clamp(60px, 10vh, 120px) var(--padding-desktop);
+        gap: clamp(40px, 8vh, 80px);
+    }
+
+    /* contenedor posicional */
+    .servicios__lista {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        gap: 0;
+    }
+
+    .servicio {
+        position: absolute;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        width: clamp(160px, 22vw, 280px);
+        }
+
+    .servicio--derecha {
+        flex-direction: column;
+        }
+
+    .servicio:nth-child(1) {
+            top: 0;
+            left: 0;
+        }
+    
+    .servicio:nth-child(2) {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    
+    .servicio:nth-child(3) {
+            top: 0;
+            right: 0;
+        }
+    
+    .servicio:nth-child(4) {
+            bottom: 0;
+            right: 0;
+        }
+    
+    .servicio:nth-child(5) {
+            bottom: 0;
+            left: 0;
+        }
+
+    .servicio__icono {
+            width: clamp(140px, 20vw, 260px);
+        }
+
+    /* el texto se oculta por defecto en desktop y aparece al hover */
+    .servicio__cta,
+    .servicio__descripcion {
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            pointer-events: none;
+        }
+
+.servicio:hover .servicio__cta,
+.servicio__descripcion {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+/* SECCION PROYECTOS DESKTOP */
+/* En desktop el zoom aparece con hover */
+.proyectos__slider-wrapper {
+    cursor: grab;
+    --thumb-width: clamp(280px, 28vw, 420px);
+    --thumb-height: calc(var(--thumb-width) * 4 / 3);
+}
+
+/* tarjetas más anchas en desktop */
+.proyecto {
+    width: clamp(280px, 28vw, 420px);
+}
+
+/* DESKTOP: texto oculto por defecto */
+.proyecto__info {
+    padding-left: var(--padding-desktop);
+    padding-right: 0;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+}
+
+.proyecto__imagen-wrapper:hover~.proyecto__info {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* zoom en la imagen al hacer hover */
+.proyecto__imagen-wrapper:hover .proyecto__img {
+    transform: scale(1.04);
+}
+
+.proyectos__flecha {
+    display: flex;
+    position: absolute;
+    top: calc(var(--thumb-height) / 2);
+    transform: translateY(-50%);
+    z-index: 10;
+    color: var(--clr-corporativo-yellow);
+    background:hsl(328, 73%, 23%, 0.8);
+    border: 1px hsl(328, 73%, 23%, 0.8);
+    border-radius: 50%;
+    width: clamp(36px, 3vw, 48px);
+    height: clamp(36px, 3vw, 48px);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.proyectos__flecha:hover {
+    opacity: 0.5;
+}
+
+.proyectos__flecha--prev {
+    left: var(--padding-desktop);
+}
+
+.proyectos__flecha--next {
+    right: var(--padding-desktop);
+}
+/* SECCION PROYECTOS DESKTOP */
+
 /* FOOTER */
-    .footer {
+    .footer-desktop {
         /* con esto hacemos que las dos columnas left y right se pongan en fila */
         display: flex;
         /* con stretch obligamos a las columnas a ocupar todo el alto del footer */
@@ -326,7 +754,7 @@ body {
         overflow: hidden;
     }
 
-    .footer__left {
+    .footer-desktop__left {
         display: flex;
         /* apilamos logo y copyright */
         flex-direction: column;
@@ -347,16 +775,16 @@ body {
          align-items: flex-start;
         }
 
-    .footer__logo {
+    .footer-desktop__logo {
         /*Así escala suavemente con la pantalla */
        width: clamp(400px, 50vw, 800px);
         /* Mantiene las proporciones originales del SVG */
         height: auto;
         margin: 0;
-        padding: var(--padding-web);
+        padding: var(--padding-desktop);
     }
 
-        .footer__copy {
+        .footer-desktop__copy {
             font-family: var(--text-font-inter);
             font-size: var(--text-size-copyright);
             color: var(--clr-black);
@@ -366,7 +794,7 @@ body {
             padding-bottom: vw;
         }
     
-        .footer__right {
+        .footer-desktop__right {
             display: flex;
             flex-direction: column;
             /* todo alineado a la derecha */
@@ -376,11 +804,11 @@ body {
                 /* Espacio mínimo entre elementos por si la pantalla es justa y space-between los acerca demasiado */
             /* gap: 16px; */
             /* text-align: right; */
-            padding: var(--padding-web);
+            padding: var(--padding-desktop);
         }
 
         /* contenedor para agrupar los iconos sociales + email y así conseguir el diseño deseado */
-      .footer__contact-group {
+      .footer-desktop__contact-group {
                 display: flex;
                 flex-direction: column;
                 align-items: flex-end;
@@ -392,7 +820,6 @@ body {
             display: flex;
             gap: 25px;
             align-items: center;
-    
         }
     
         .social-icons-desktop a {
@@ -411,7 +838,7 @@ body {
             height: clamp(20px, 6vw, 35px);
             }
     
-        .footer__email {
+        .footer-desktop__email {
             font-family: var(--text-font-inter);
             font-size: var(--text-size-text);
             color: var(--clr-black);
@@ -420,12 +847,12 @@ body {
             font-weight: 500;
         }
     
-        .footer__email:hover {
+        .footer-desktop__email:hover {
             /* Al pasar el ratón, el email pierde opacidad*/
             opacity: 50%;
         }
     
-        .footer__legal {
+        .footer-desktop__legal {
             display: flex;
             flex-direction: column; /* Los tres links legales apilados verticalmente */
             /* align-items: flex-end; Alineados a la derecha */
@@ -434,7 +861,7 @@ body {
            margin-bottom: 0;
         }
     
-        .footer__legal a {
+        .footer-desktop__legal a {
             font-family: var(--text-font-inter);
             font-size: var(--text-size-text);
             color: var(--clr-black);
@@ -442,11 +869,10 @@ body {
             transition: color 0.3s ease;
         }
     
-        .footer__legal a:hover {
+        .footer-desktop__legal a:hover {
             opacity: 50%;
         }
-
-}
 /* FOOTER */
 
 
+}
