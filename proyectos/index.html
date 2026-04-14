@@ -1,11 +1,220 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Emes Agencia Creativa - Proyectos</title>
+    <!-- cambiar el codigo de las fuentes, con las dos seleccionadas ese codigo -->
+    <!-- Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+    <!-- Excon variable -->
+    <link href="https://api.fontshare.com/v2/css?f[]=excon@1,2&display=swap" rel="stylesheet">
+    <!-- Inter -->
+
+    <link rel="stylesheet" href="estilo-proyectos.css">
 </head>
+
 <body>
+<div class="h2__header">
+   <h2>Te presentamos nuestros <span>proyectos</span></h2>
+</div>
+
+<main class="projects-section">
+    <!-- hacemos las dos columnas -->
+    <div class="projects-grid">
+        <div class="left-column carousel-track" id="left-column">
+            <div class="project-list" id="left-list">
+                <!-- project-card es el contenedor externo de cada tarjeta -->
+                <div class="project-card">
+                    <!-- card-inner es la tarjeta que gira -->
+                    <div class="card-inner">
+                        <!-- card-front es la cara principal de la tarjeta con la foto -->
+                        <a href="#" class="card-front">
+                            <img src="assets/img-proyectos-1-bulle.jpg" alt="BULLÉ" class="card-img">
+                        </a>
+                        <div class="card-back">
+                            <!-- card-back es la cara que vemos cuando gira -->
+                            <h2 class="card-title">BULLÉ</h2>
+                            <p class="card-description">Rebranding</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="card-inner">
+                        <a href="#" class="card-front">
+                            <img src="assets/img-proyectos-2-joyas.jpg" alt="Victoria Sayeg Jewelry" class="card-img">
+                        </a>
+                        <div class="card-back">
+                            <h2 class="card-title">VICTORIA SAYEG</h2>
+                            <p class="card-description">Audiovisual</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="card-inner">
+                        <a href="#" class="card-front">
+                            <img src="assets/img-proyectos-3-pan.jpeg" alt="DOLCE" class="card-img">
+                        </a>
+                        <div class="card-back">
+                            <h2 class="card-title">DOLCE</h2>
+                            <p class="card-description">UX/UI</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="card-inner">
+                        <a href="#" class="card-front">
+                            <img src="assets/img-proyectos-4-pizza.jpg" alt="PIZZA" class="card-img">
+                        </a>
+                        <div class="card-back">
+                            <h2 class="card-title">PIZZERIA</h2>
+                            <p class="card-description">Social Media</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-column carousel-track" id="right-column">
+            <div class="project-list" id="right-list">
+                <div class="project-card">
+                    <div class="card-inner">
+                        <a href="#" class="card-front">
+                            <img src="assets/img-proyectos-5-matcha.jpeg" alt="Matcha" class="card-img">
+                        </a>
+                        <div class="card-back">
+                            <h2 class="card-title">FRESH FUSE</h2>
+                            <p class="card-description">Branding</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="card-inner">
+                        <a href="#" class="card-front">
+                            <img src="assets/img-proyectos-6-flow.jpeg" alt="FLOW PILATES" class="card-img">
+                        </a>
+                        <div class="card-back">
+                            <h2 class="card-title">FLOW PILATES</h2>
+                            <p class="card-description">Diseño Gráfico</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="card-inner">
+                        <a href="#" class="card-front">
+                            <img src="assets/img-proyectos-7-vitamine.jpg" alt="VITAMINE" class="card-img">
+                        </a>
+                        <div class="card-back">
+                            <h2 class="card-title">VITAMINE</h2>
+                            <p class="card-description">Diseño Web</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="card-inner">
+                        <a href="#" class="card-front">
+                            <img src="assets/img-proyectos-8-coco.jpg" alt="COCO" class="card-img">
+                        </a>
+                        <div class="card-back">
+                            <h2 class="card-title">COCO</h2>
+                            <p class="card-description">Audiovisual | UX/UI</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
     
+<script>
+    /**
+     * LÓGICA DE PROYECTOS EN BUCLE INFINITO SINCRONIZADA CON SCROLL REAL
+     */
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // 1. Seleccionamos los elementos de las columnas
+            const leftList = document.getElementById('left-list');
+            const rightList = document.getElementById('right-list');
+
+            // Seleccionamos las tarjetas originales para medir dimensiones
+            const originalCards = leftList.querySelectorAll('.project-card');
+
+            // Si no hay tarjetas, detenemos la ejecución
+            if (originalCards.length === 0) return;
+
+            // 2. Función para clonar las tarjetas (necesario para el efecto visual de bucle)
+            //con cloneCards creamos el bucle infinito, sube la última foto al desaparecer la primera, creando una especie de rueda
+            const cloneCards = (list) => {
+                const cardsToClone = list.querySelectorAll('.project-card');
+                cardsToClone.forEach(card => {
+                    const clone = card.cloneNode(true);
+                    list.appendChild(clone);
+                });
+            };
+
+            // Ejecutamos la clonación en ambas columnas
+            cloneCards(leftList);
+            cloneCards(rightList);
+
+            // 3. Cálculos de altura para el bucle
+            // Medimos la altura de una tarjeta + sus márgenes
+            const cardMargin = 10; // Debe coincidir con --card-margin en tu CSS
+            const cardHeight = originalCards[0].offsetHeight + (cardMargin * 2);
+            const totalSingleHeight = originalCards.length * cardHeight;
+
+            /**
+             * Función de animación principal
+             * Se ejecuta en cada frame para mover las listas según el scroll del usuario
+             */
+            function updateProjectsOnScroll() {
+                // Obtenemos la posición actual de scroll del navegador
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+                // Usamos el operador módulo (%) para que el valor "vuelva a cero" 
+                // cuando hayamos recorrido la altura de la lista original.
+                const scrollAmount = scrollTop % totalSingleHeight;
+
+                // COLUMNA IZQUIERDA: Sube (valor negativo)
+                leftList.style.transform = `translateY(-${scrollAmount}px)`;
+
+                // COLUMNA DERECHA: Baja (valor positivo)
+                // La ajustamos restando totalSingleHeight para que la segunda copia 
+                // de fotos esté siempre visible mientras bajamos.
+                rightList.style.transform = `translateY(${scrollAmount - totalSingleHeight}px)`;
+
+                // Mantenemos la animación fluida
+                requestAnimationFrame(updateProjectsOnScroll);
+            }
+
+            /**
+             * Control de "Scroll Infinito" del navegador
+             * Si el usuario llegara al final de los 1000vh del body, lo devolvemos al inicio
+             * sutilmente para que nunca se detenga la posibilidad de hacer scroll.
+             */
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+                const bodyHeight = document.body.offsetHeight;
+                const windowHeight = window.innerHeight;
+
+                if (currentScroll + windowHeight >= bodyHeight - 10) {
+                    // Saltamos al inicio (casi imperceptible por el bucle visual)
+                    window.scrollTo(0, 10);
+                } else if (currentScroll <= 0) {
+                    // Si intenta subir más allá del inicio, lo mandamos un poco abajo
+                    window.scrollTo(0, bodyHeight - windowHeight - 10);
+                }
+            });
+
+            // Iniciamos el ciclo de animación
+            updateProjectsOnScroll();
+        });
+</script>
+
 </body>
-</html>

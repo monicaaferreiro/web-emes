@@ -1,0 +1,285 @@
+/* --- ESTILOS BÁSICOS Y RESETEO --- */
+/* Importamos las mismas variables que tenías en estilo-proyectos.css */
+:root {
+    --clr-corporativo-purple: hsl(328, 73%, 23%);
+    --clr-corporativo-blue: hsl(212, 50%, 65%);
+    --clr-corporativo-yellow: hsl(55, 88%, 84%);
+    --clr-corporativo-orange: hsl(26, 91%, 79%);
+    --clr-black: hsl(0, 0%, 0%);
+
+    --bg-color-contacto: #f0c9a4;
+    /* El color de fondo de tus fotos */
+    --text-color-contacto: #333333;
+    /* Color de texto oscuro para los labels */
+    --form-input-color: #333333;
+    /* Color del texto dentro de los inputs */
+    --form-border-color: #333333;
+    /* El color de las líneas de separación */
+
+    --title-font-playfair: 'Playfair Display', serif;
+    --title-font-excon: 'Excon', sans-serif;
+    --text-font-inter: 'Inter', sans-serif;
+
+    --text-size-label: clamp(1rem, 0.906rem + 0.382vw, 1.25rem);
+    --text-size-title-contacto: clamp(1.125rem, 0.374rem + 3.056vw, 3.125rem);
+    --padding-contacto: 10vw;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color-contacto);
+    font-family: var(--text-font-inter);
+    color: var(--clr-black);
+    overflow-x: hidden;
+}
+
+/* --- INTRODUCCIÓN --- */
+.contacto-intro {
+    text-align: center;
+    padding: var(--padding-contacto);
+    margin-bottom: 20px;
+}
+
+.contacto-intro h2 {
+    font-family: var(--title-font-excon);
+    font-size: var(--text-size-title-contacto);
+    font-weight: 400;
+}
+
+.serif-title {
+    font-family: var(--title-font-playfair);
+    font-style: italic;
+    font-weight: 400;
+}
+
+/* --- FORMULARIO (ESTILO VISUAL) --- */
+.contacto-form {
+    padding: var(--padding-contacto);
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contacto-form fieldset {
+    border: none;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 25px;
+    border-bottom: 1px solid var(--form-border-color);
+    /* La línea de separación */
+}
+
+/* Los labels están arriba, como en el diseño */
+.form-group label {
+    display: block;
+    color: var(--text-color-contacto);
+    font-size: var(--text-size-label);
+    margin-bottom: 5px;
+    font-weight: 400;
+}
+
+/* Estilos para los inputs y el textarea */
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 10px 0;
+    color: var(--form-input-color);
+    font-family: var(--text-font-inter);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+/* El textarea se expandirá si es necesario */
+.form-group textarea {
+    resize: none;
+    overflow: hidden;
+    min-height: 40px;
+}
+
+/* Botón "Enviar" */
+.form-actions {
+    text-align: right;
+    margin-bottom: 30px;
+}
+
+.btn-enviar {
+    background: transparent;
+    border: none;
+    color: #333333;
+    font-family: var(--title-font-playfair);
+    font-style: italic;
+    font-size: 20px;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* Política de privacidad y checkbox */
+.politica-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.politica-group input[type="checkbox"] {
+    appearance: none;
+    /* Quitamos el checkbox por defecto */
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--form-border-color);
+    background-color: transparent;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.politica-group input[type="checkbox"]:checked {
+    background-color: var(--clr-corporativo-purple);
+    /* Color corporativo al clicar */
+    border-color: var(--clr-corporativo-purple);
+}
+
+.politica-group label {
+    color: #333333;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.4;
+}
+
+.politica-group a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+/* Clase para la accesibilidad (sr-only) */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* --- MEDIA QUERY PARA ESCRITORIO (>= 768px) --- */
+@media (min-width: 768px) {
+
+    .contacto-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        /* Dos columnas igual que antes */
+        height: 100vh;
+        overflow: hidden;
+        /* Importante para la animación de entrada */
+    }
+
+    /* Estilos para el texto de introducción en escritorio */
+    .contacto-intro {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-right: 10vw;
+        /* Espacio para que no se pegue al formulario */
+        text-align: right;
+        opacity: 0;
+        /* Empieza invisible */
+        transform: translateX(-50px);
+        /* Empieza desplazado a la izquierda */
+        animation: fadeInIntro 1s ease forwards;
+        /* Pequeña animación de entrada al cargar */
+    }
+
+    .contacto-intro h2 {
+        line-height: 1.1;
+        max-width: 500px;
+    }
+
+    /* Estilos para la palabra "hablar" clickable */
+    .clickable {
+        cursor: pointer;
+        position: relative;
+    }
+
+    /* Pequeña línea que aparece al pasar el ratón por encima de "hablar" */
+    .clickable::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background-color: var(--clr-black);
+        transition: width 0.3s ease;
+    }
+
+    .clickable:hover::after {
+        width: 100%;
+    }
+
+    /* Estilo para cuando "hablar" está activo (el formulario está visible) */
+    .serif-title.clickable.active {
+        color: var(--clr-corporativo-purple);
+    }
+
+    .clickable.active::after {
+        background-color: var(--clr-corporativo-purple);
+    }
+
+
+    /* FORMULARIO EN ESCRITORIO (ANIMACIÓN DE ENTRADA) */
+    .contacto-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        max-width: none;
+        width: 100%;
+        padding-left: 5vw;
+        /* Espacio para que no se pegue al texto de intro */
+
+        /* ESTADO INICIAL (OCULTO) */
+        opacity: 0;
+        pointer-events: none;
+        /* No permite clicks mientras está oculto */
+        transform: translateX(100px);
+        /* Oculto 100px a la derecha */
+        transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ESTADO VISIBLE (CUANDO JS AÑADE LA CLASE) */
+    .contacto-form.is-visible {
+        opacity: 1;
+        pointer-events: auto;
+        /* Reactivamos los clicks */
+        transform: translateX(0);
+        /* Vuelve a su posición original */
+    }
+
+    /* Ajustes menores para escritorio */
+    .form-group label {
+        font-size: 16px;
+    }
+
+    .btn-enviar {
+        font-size: 24px;
+    }
+
+    /* Animaciones fadeIn */
+    @keyframes fadeInIntro {
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+}

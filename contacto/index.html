@@ -1,11 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Emes Agencia Creativa - Contacto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=excon@1,2&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilo-contacto.css">
 </head>
+
 <body>
-    
+
+    <main class="contacto-section">
+        <div class="contacto-intro">
+            <h2>Nos inspiran las historias.<br>Vamos a <span id="trigger-hablar"
+                    class="serif-title clickable">hablar</span></h2>
+        </div>
+
+        <form class="contacto-form" id="contacto-form" action="#" method="POST">
+
+            <fieldset>
+                <legend class="sr-only">Tus datos de contacto</legend>
+
+                <div class="form-group">
+                    <label for="nombre">Nombre*</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="apellidos">Apellidos*</label>
+                    <input type="text" id="apellidos" name="apellidos" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email*</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono">Teléfono*</label>
+                    <input type="tel" id="telefono" name="telefono" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="web-rrss">Web/RR.SS de tu marca</label>
+                    <input type="text" id="web-rrss" name="web-rrss">
+                </div>
+
+                <div class="form-group textarea-group">
+                    <label for="idea">¿Qué idea tienes en mente?</label>
+                    <textarea id="idea" name="idea" rows="1"></textarea>
+                </div>
+            </fieldset>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-enviar">Enviar</button>
+            </div>
+
+            <div class="politica-group">
+                <input type="checkbox" id="politica" name="politica" required>
+                <label for="politica">He leído y acepto el tratamiento de mis datos en las condiciones mencionadas. <a
+                        href="#">Ver información</a>.</label>
+            </div>
+
+        </form>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+                // 1. Seleccionamos los elementos que necesitamos
+                const triggerHablar = document.getElementById('trigger-hablar');
+                const contactoForm = document.getElementById('contacto-form');
+
+                // Detenemos la ejecución si no existen los elementos
+                if (!triggerHablar || !contactoForm) return;
+
+                // 2. Función que se ejecutará al hacer clic en "hablar"
+                const toggleForm = () => {
+                    // En escritorio, activamos la clase que hace el formulario visible
+                    contactoForm.classList.toggle('is-visible');
+                    // También cambiamos el estilo de la palabra para indicar que ya se pulsó
+                    triggerHablar.classList.toggle('active');
+                };
+
+                // 3. Añadimos el evento "click" al gatillo
+                // Solo activamos este comportamiento si la pantalla es de escritorio
+                if (window.innerWidth >= 768) {
+                    triggerHablar.addEventListener('click', toggleForm);
+                }
+
+                // Opcional: Para el textarea autoreflejable
+                const textarea = document.getElementById('idea');
+                textarea.addEventListener('input', function () {
+                    this.style.height = 'auto'; // Reset height
+                    this.style.height = (this.scrollHeight) + 'px'; // Set new height based on scrollHeight
+                });
+
+            });
+    </script>
 </body>
+
 </html>

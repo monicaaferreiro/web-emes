@@ -82,16 +82,21 @@ body {
     flex-direction: column;
 }
 
-.proyectos__header_1 {
+/* .proyectos__header_1 {
     text-align: left;
 }
 
 .proyectos__header_2 {
     text-align: center;
-}
+} */
 
 .proyectos__header_3 {
     text-align: right;
+}
+
+.proyectos__header_firstline {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 .info_card {
@@ -155,7 +160,7 @@ picture img {
 
 .contenedor_square {
     width: 100%;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1 / 1.5;
     overflow: hidden;
     display: block;
     max-width: 300px;
@@ -167,4 +172,54 @@ picture img {
     object-fit: cover;
     object-position: center;
     display: block;
+}
+
+.contenedor_rectangle {
+    width: 100%;
+    aspect-ratio: 2 / 1.5;
+    overflow: hidden;
+    display: block;
+    max-width: 1024px;
+}
+
+.contenedor_rectangle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.hero_container {
+    /* con % no funciona, con vh sí, no sé por qué */
+    height: 70vh;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.contenedor_plantilla_hero {
+    width: 100%;
+    height: 100%;
+}
+
+.img_fixed {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* efecto fijo al hacer scroll */
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* se queda detrás del contenido */
+    z-index: -1;
+}
+
+.contenido_texto {
+    background-color: white;
+    /* tapar la imagen fija al subir */
+    position: relative;
+    z-index: 1;
+    padding: 60px 20px;
 }
