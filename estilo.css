@@ -15,9 +15,10 @@
     --text-size-title-playfairdisplay-entre-excon: clamp(1.125rem, 0.374rem + 3.056vw, 3.125rem);
     --text-size-copyright: clamp(1rem, 0.906rem + 0.382vw, 1.25rem);
 
-    --padding-movil: 5vw; /* Límites retícula */
+    --padding-movil: 4vw; /* Límites retícula */
     --padding-desktop: 2vw;
-        /* Límites retícula */
+    --padding-secciones: clamp(30px, 8vh, 40px); /* padding arriba-abajo entre secciones */
+    --gap-secciones: clamp(10px, 6vh, 60px); /* espacio entre los contenidos dentro de las secciones */
 }
 
 * {
@@ -26,6 +27,7 @@
     padding: 0;
 }
 
+/* CLASES UTILITARIAS */
 .btn {
     display: inline-block;
     align-self: center;
@@ -47,6 +49,21 @@
     background: var(--clr-corporativo-yellow);
     color: var(--clr-corporativo-purple);
     border-color: var(--clr-corporativo-purple);
+}
+
+.titulo1-excon {
+    text-align: center;
+    font-family: var(--title-font-excon);
+    font-size: var(--text-size-title-excon);
+    font-weight: 400;
+}
+
+.titulo2-playfair {
+    text-align: center;
+    font-family: var(--title-font-playfair);
+        font-size: var(--text-size-title-playfairdisplay);
+        font-style: italic;
+        font-weight: 700;
 }
 
 body {
@@ -280,10 +297,10 @@ body {
 
 /* SERVICIOS */
 .seccion-servicios {
-    padding: clamp(30px, 8vh, 40px) var(--padding-movil);
+    padding: var(--padding-secciones) var(--padding-movil);
     display: flex;
     flex-direction: column;
-    gap: clamp(10px, 6vh, 60px);
+    gap: var(--gap-secciones);
 }
 
 .servicios__header {
@@ -323,7 +340,7 @@ body {
 
 .servicio__icono {
     flex-shrink: 0;
-    width: clamp(140px, 45vw, 220px);
+    width: clamp(140px, 45vw, 320px);
 }
 
 .servicio__icono svg {
@@ -369,10 +386,10 @@ body {
 /* SECCIÓN PROYECTOS */
 
 .seccion-proyectos {
-    padding: clamp(30px, 8vh, 40px) 0;
+    padding: var(--padding-secciones) 0;
     display: flex;
     flex-direction: column;
-    gap: clamp(10px, 6vh, 60px);
+    gap: var(--gap-secciones);
     overflow: hidden;
 }
 
@@ -410,8 +427,7 @@ body {
     display: flex;
     gap: 10px;
     transition: transform 0.5s ease;
-    /* Avisa al navegador que este elemento se va a animar
-       para que lo optimice en GPU */
+    /* Avisa al navegador que este elemento se va a animar para que lo optimice en GPU */
     will-change: transform;
 }
 
@@ -472,6 +488,49 @@ body {
     display: none;
 }
 /* SECCIÓN PROYECTOS */
+
+/* SECCIÓN PATH */
+.svg-animation-section {
+    height: 300vh;
+    /* Controla cuánto scroll dura la animación */
+    position: relative;
+    background-color: #ffffff;
+    /* O el color de fondo que prefieras */
+    margin-top: -10px;
+}
+
+.svg-sticky-container {
+    position: sticky;
+    top: 0;
+    width: 100vh;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    /* Mantenemos centrado, pero ajustaremos el SVG */
+    justify-content: center;
+    overflow: hidden;
+
+}
+
+#logo-animado {
+    width: 160%;
+    /* En móvil ocupa casi todo el ancho */
+    max-width: none;
+    /* En desktop no crece infinitamente */
+    height: auto;
+    transform: translateY(-5%);
+}
+
+/* Estilos base para los trazos (transparentes al inicio) */
+.st3,
+.st4,
+.st5,
+.st6 {
+    stroke-dasharray: 1;
+    /* Se sobrescribirá con JS */
+    stroke-dashoffset: 1;
+}
+/* SECCIÓN PATH */
 
 /* FOOTER MÓVIL */
 .footer-desktop {
@@ -610,68 +669,68 @@ body {
 
 /* SECCIÓN SERVICIOS DESKTOP */
 
-    .servicios {
+.servicios {
         padding: clamp(60px, 10vh, 120px) var(--padding-desktop);
         gap: clamp(40px, 8vh, 80px);
     }
 
     /* contenedor posicional */
-    .servicios__lista {
+.servicios__lista {
         position: relative;
         width: 100%;
         aspect-ratio: 16 / 9;
         gap: 0;
     }
 
-    .servicio {
-        position: absolute;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        width: clamp(160px, 22vw, 280px);
+.servicio {
+    position: absolute;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: clamp(160px, 22vw, 280px);
+    }
+
+.servicio--derecha {
+    flex-direction: column;
+    }
+
+.servicio:nth-child(1) {
+    top: 0;
+    left: 0;
+        }
+    
+.servicio:nth-child(2) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+        }
+    
+.servicio:nth-child(3) {
+    top: 0;
+    right: 0;
+        }
+    
+.servicio:nth-child(4) {
+    bottom: 0;
+    right: 0;
+        }
+    
+.servicio:nth-child(5) {
+    bottom: 0;
+    left: 0;
         }
 
-    .servicio--derecha {
-        flex-direction: column;
-        }
-
-    .servicio:nth-child(1) {
-            top: 0;
-            left: 0;
-        }
-    
-    .servicio:nth-child(2) {
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-    
-    .servicio:nth-child(3) {
-            top: 0;
-            right: 0;
-        }
-    
-    .servicio:nth-child(4) {
-            bottom: 0;
-            right: 0;
-        }
-    
-    .servicio:nth-child(5) {
-            bottom: 0;
-            left: 0;
-        }
-
-    .servicio__icono {
-            width: clamp(140px, 20vw, 260px);
+.servicio__icono {
+    width: clamp(140px, 20vw, 260px);
         }
 
     /* el texto se oculta por defecto en desktop y aparece al hover */
-    .servicio__cta,
-    .servicio__descripcion {
-            opacity: 0;
-            transform: translateY(8px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            pointer-events: none;
+.servicio__cta,
+.servicio__descripcion {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
         }
 
 .servicio:hover .servicio__cta,
@@ -743,6 +802,16 @@ body {
     right: var(--padding-desktop);
 }
 /* SECCION PROYECTOS DESKTOP */
+
+
+/* SECCIÓN PATH DESKTOP */
+#logo-animado {
+    width: 90%;
+    /* En desktop volvemos al tamaño estándar */
+    max-width: 1200px;
+    transform: translateY(0);
+}
+/* SECCIÓN PATH DESKTOP */
 
 /* FOOTER */
     .footer-desktop {

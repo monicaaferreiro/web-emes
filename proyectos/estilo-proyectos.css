@@ -1,61 +1,7 @@
-:root {
-    --clr-corporativo-purple: hsl(328, 73%, 23%);
-    --clr-corporativo-blue: hsl(212, 50%, 65%);
-    --clr-corporativo-yellow: hsl(55, 88%, 84%);
-    --clr-corporativo-orange: hsl(26, 91%, 79%);
-    --clr-black: hsl(0, 0%, 0%);
-    /* para darle altura fija al nav */
-    --nav-height: 60px;
-    --title-font-playfair: 'Playfair Display', serif;
-    --title-font-excon: 'Excon', sans-serif;
-    --text-font-inter: 'Inter', sans-serif;
-    --text-size-text: clamp(1.125rem, 0.863rem + 1.066vw, 1.1625rem);
-    --text-size-title-excon: clamp(1.125rem, 0.374rem + 3.056vw, 3.125rem);
-    --text-size-title-playfairdisplay: clamp(1.5rem, 0.163rem + 5.443vw, 5.0625rem);
-    --text-size-title-playfairdisplay-entre-excon: clamp(1.125rem, 0.374rem + 3.056vw, 3.125rem);
-    --text-size-copyright: clamp(1rem, 0.906rem + 0.382vw, 1.25rem);
-
-    --padding-movil: 5vw;
-    /* Límites retícula */
-    --padding-desktop: 2vw;
-    /* Límites retícula */
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-.btn {
-    display: inline-block;
-    align-self: center;
-    white-space: nowrap;
-    text-decoration: none;
-    cursor: pointer;
-    padding: clamp(10px, 1.3vw, 15px) clamp(40px, 4.2vw, 60px);
-    border-radius: 42px;
-    background: var(--clr-corporativo-purple);
-    color: var(--clr-corporativo-yellow);
-    font-family: var(--text-font-inter);
-    font-size: var(--text-size-text);
-    font-weight: 600;
-    border: 2px solid transparent;
-    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-.btn:hover {
-    background: var(--clr-corporativo-yellow);
-    color: var(--clr-corporativo-purple);
-    border-color: var(--clr-corporativo-purple);
-}
 
 body {
-    font-family: var(--text-font-inter);
     overflow-x: hidden;
     overflow-y: auto;
-    /* para que haya scroll sin haber contenido tan largo le decimos al navegador que la altura de la pantalla es 10 veces su medida */
-    height: 1000vh;
 }
 
 
@@ -69,143 +15,183 @@ h2 span {
 }
 
 .h2__header {
-    text-align: center;
-    position: fixed;
+    /* text-align: center;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 10;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; */
+    grid-column: 1 / span 2;
+    text-align: center;
+    padding: clamp(80px, 7vh, 180px) 0 clamp(10px, 3vh, 40px) 0;
+    margin: 0;
 }
 
 /* --- SECCIÓN PRINCIPAL Y CUADRÍCULA --- */
 .projects-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    /* Espacio para el encabezado */
-    padding-top: 100px;
-    /* la sección con las columnas queda fija al hacer scroll, así activamos el JS */
-    position: fixed;
-    top: 0;
-    left: 0;
+    position: relative;
+    height: 400vh;
+    /* Duración del scroll */
     width: 100%;
-    height: 100vh;
-    padding-top: 80px;
-    pointer-events: none;
 }
 
 .projects-grid {
+    padding: 0 var(--padding-movil);
+    position: sticky;
+    top: var(--nav-height);
+    /* Para que no se pegue al techo si hay nav */
+    left: 0;
+    width: 100%;
+    /* En móvil, bajamos la altura para que no flote en el medio de la nada */
+    height: 65vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    width: 100%;
-    /* tamaño de cuadricula */
-    max-width: 800px;
-    /* ajusta según el tamaño del encabezado */
-    height: calc(100% - 120px);
-    pointer-events: auto;
+    gap: 15px;
+    margin: 0 auto;
+    /* Alineamos al inicio (arriba) en lugar de al centro */
+    align-content: start;
+    box-sizing: border-box;
+    padding-bottom: var(--padding-secciones);
 }
 
+/* --- LAS COLUMNAS (LOS CARRILES) --- */
 .carousel-track {
+position: relative;
+    /* En móvil, carriles más cortos para que el usuario entienda que hay más abajo */
+    height: 60vh;
     overflow: hidden;
-    position: relative;
-    height: 100%;
+    margin-top: 20px;
+    /* Un pequeño respiro respecto al título */
 }
 
 .project-list {
     position: absolute;
+    top: 0;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    will-change: transform;
 }
 
-/* --- TARJETAS DE PROYECTO --- */
+/* --- LAS TARJETAS (CARDS) - AQUÍ ESTÁ TU DISEÑO 3D --- */
 .project-card {
-    width: calc(100% - calc(2 * var(--card-margin)));
-    /* Ajusta el ancho para el margen lateral */
+    width: calc(100% - (var(--card-margin) * 2));
     aspect-ratio: 1 / 1;
-    /* FORMA CUADRADA PERFECCIONADA */
-    margin: var(--card-margin);
-    perspective: 1000px;
-    /* Crea el espacio 3D para el volteo, sino se vería plana */
+    /* Mantiene el formato cuadrado */
+    margin: var(--card-margin) auto;
+    perspective: none;
+    /* Crucial para el efecto 3D */
 }
 
 .card-inner {
     position: relative;
     width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-style: preserve-3d;
-    /* Permite volteo 3D entre front card y back card */
-}
-
-/* Efecto de volteo al pasar el ratón */
-.project-card:hover .card-inner {
-    transform: rotateY(180deg);
+    /* height: 100%; */
+    transition: none;
+    transform-style: flat;
 }
 
 .card-front,
 .card-back {
-    position: absolute;
+    position: relative;
     width: 100%;
-    height: 100%;
-    /* Oculta la cara trasera cuando está volteada para que no se mezcle el contenido */
-    backface-visibility: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: var(--card-border-radius);
-    overflow: hidden;
-    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
+    /* height: 100%; */
+    backface-visibility: visible;
+    transform: none !important;
+    /* border-radius: var(--card-border-radius);
+    overflow: hidden; */
 }
 
-.card-front {
+/* .card-front {
     background-color: #f0f0f0;
-}
-
-.card-back {
-    /* estaría guay aquí que cada card tuviese un color distinto */
-    background-color: var(--clr-corporativo-purple);
-    color: white;
-    transform: rotateY(180deg);
-    /* La cara trasera está inicialmente volteada */
-    flex-direction: column;
-    padding: 20px;
-}
+    display: block;
+} */
 
 .card-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
 }
 
-.card-title {
-    font-size: 16px;
-    margin-bottom: 8px;
-    font-weight: 600;
+.card-back {
+    font-family: var(--text-font-inter);
+    background-color: transparent;
+    color: rgb(0, 0, 0);
+    padding: 10px 0;
+    display: block;
+    padding: 10px 0 40px 0;
+    text-align: left;
 }
 
-.card-description {
-    font-size: 14px;
-    font-weight: 300;
-}
 
-/* --- MEDIA QUERY PARA ESCRITORIO (>= 768px) --- */
+/* --- DESKTOP--- */
 @media (min-width: 768px) {
-    .page-header {
-        text-align: right;
-        padding-right: 50px;
+.h2__header {
+        padding: clamp(100px, 6vh, 170px) 0 clamp(10px, 3vh, 40px) 0;
+    }
+    
+.projects-grid {
+        height: 90vh;
+        /* Recuperamos altura en pantallas grandes */
+        align-content: center;
+        /* Aquí sí queda bien centrado verticalmente */
+        padding: 0 var(--padding-desktop);
+        max-width: 90vw;
+        gap: clamp(10px, 6vh, 50px);
     }
 
-    .header-title {
-        font-size: 28px;
-    }
 
-    .projects-grid {
-        max-width: 1200px;
-        height: calc(100% - 150px);
+.carousel-track {
+    height: 80vh;
+    /* Un poco más corto para que se vea el título arriba */
     }
+/* Restauramos el efecto 3D solo para Desktop */
+.project-card {
+    perspective: 1000px;
 }
 
+.card-inner {
+    position: relative;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+/* .project-card:hover .card-inner {
+    transform: rotateY(180deg);
+} */
+
+.card-front,
+.card-back {
+    position: absolute;
+    /* Volvemos a superponerlas */
+    top: 0;
+    left: 0;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.card-back {
+    background-color: var(--clr-corporativo-purple);
+    color: white;
+    transform: rotateY(180deg) !important;
+    display: flex;
+    /* Centrado para el efecto hover */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Buscamos la línea que ya tenías y le añadimos el :not() */
+.projects-grid:not(.is-scrolling) .project-card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Opcional: suavizar el regreso cuando paramos el scroll */
+.card-inner {
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+}
