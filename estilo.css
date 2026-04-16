@@ -491,7 +491,7 @@ body {
 
 /* SECCIÓN PATH */
 .svg-animation-section {
-    height: 300vh;
+    height: 200vh;
     /* Controla cuánto scroll dura la animación */
     position: relative;
     background-color: #ffffff;
@@ -502,8 +502,8 @@ body {
 .svg-sticky-container {
     position: sticky;
     top: 0;
-    width: 100vh;
-    height: 100vh;
+    /* width: 100vh;
+    height: 100vh; */
     display: flex;
     align-items: center;
     /* Mantenemos centrado, pero ajustaremos el SVG */
@@ -513,11 +513,11 @@ body {
 }
 
 #logo-animado {
-    width: 160%;
+    /* width: 160%; */
     /* En móvil ocupa casi todo el ancho */
-    max-width: none;
+    /* max-width: none; */
     /* En desktop no crece infinitamente */
-    height: auto;
+    /* height: auto; */
     transform: translateY(-5%);
 }
 
@@ -806,11 +806,15 @@ body {
 
 /* SECCIÓN PATH DESKTOP */
 #logo-animado {
-    width: 90%;
+    /* width: 90%; */
     /* En desktop volvemos al tamaño estándar */
-    max-width: 1200px;
+    /* max-width: 1200px; */
     transform: translateY(0);
 }
+.svg-animation-section {
+    height: 300vh;
+}
+
 /* SECCIÓN PATH DESKTOP */
 
 /* FOOTER */
