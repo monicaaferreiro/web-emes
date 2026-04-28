@@ -5,7 +5,7 @@
     --clr-corporativo-orange: hsl(26, 91%, 79%);
     --clr-black: hsl(0, 0%, 0%);
     /* para darle altura fija al nav */
-    --nav-height: 60px;
+    --nav-height: clamp(80px, 10vh, 80px);
     --title-font-playfair: 'Playfair Display', serif;
     --title-font-excon: 'Excon', sans-serif;
     --text-font-inter: 'Inter', sans-serif;
@@ -88,17 +88,16 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    height: var(--nav-height);
     background: transparent;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding:var(--padding-movil);
+    padding: var(--padding-movil);
     z-index: 1000;
 }
 
 .logo-img {
-    height: 30px;
+    height: clamp(35px, 5vw, 50px);
 }
 
 /* Ocultamos el checkbox físicamente */
@@ -134,14 +133,13 @@ body {
 
 /* --- OVERLAY MÓVIL --- */
 .menu__overlay {
-    
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
     inset: 0;
-    background: var(--clr-corporativo-yellow);
+    /* background: var(--clr-corporativo-yellow); */
     display: flex;
     /* con este flex direction se suben las palabras del menu overlay */
     flex-direction: column;
@@ -149,8 +147,6 @@ body {
     align-items: center; */
     justify-content: flex-start;
     align-items: center;
-    padding: var(--nav-height) 5vw 5vh 5vw; /* top respeta el nav, resto escala */
-     /* respeta la altura del nav */
     transform: translateX(100%);
     /* Escondido arriba */
     transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
@@ -159,9 +155,10 @@ body {
 }
 
 .menu__overlay_header {
+    padding: var(--padding-movil);
+    position: absolute; /* ← desacopla el header también */
     display: flex;
     align-items: center;
-    padding: 0 20px;
     height: var(--nav-height);
     /* misma altura exacta que el nav */
     /* así el logo queda visualmente a la misma línea que la X */
@@ -169,16 +166,22 @@ body {
 }
 
 .menu__overlay_emes-logo {
-    height: 30px;
-    /* igual que .logo-img */
-    width: auto;
+    height: clamp(35px, 5vw, 50px);
     display: block;
+}
+
+.menu__overlay_nav {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 .menu__overlay_nav_list a {
     display: block;
     padding: clamp(4px, 1vh, 10px); /* padding entre links que escala */
-    font-size: clamp(1.25rem, 6.1vw, 1.5rem); /* escala entre móviles pequeños y grandes */
+    font-size: clamp(1.5rem, 7vw, 2rem); /* escala entre móviles pequeños y grandes */
     color: var(--clr-black);
     text-decoration: none;
     font-family: var(--text-font-inter);
@@ -192,19 +195,29 @@ body {
 }
 
 .menu__overlay_footer {
-    margin-top: auto;
-    gap: clamp(10px, 2vh, 20px); /* gap interno del footer que escala */
-    padding-bottom: clamp(20px, 4vh, 40px);
-    align-items: center;
+    position: absolute; /* ← se desacopla del flujo flex */
+    bottom: 5vh; /* ← pegado al fondo respetando el padding del overlay */
+    left: 0;
+    right: 0;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: clamp(50px, 8vh, 80px);
 }
 
 .logo-mm-contorno__footer {
-    width: clamp(280px, 91.6vw, 700px);
+    width: clamp(200px, 40vw, 300px);
     height: auto;
     display: block;
     /* evita el espacio baseline de las imágenes inline */
+    margin-top: 2rem;
+}
+
+.footer__items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
 }
 
 .footer__social-icons {
@@ -490,8 +503,18 @@ body {
 /* SECCIÓN PROYECTOS */
 
 /* SECCIÓN PATH */
+
+/* ocultamos por defecto el de móvil porque lo hicimos después */
+.mobile-only {
+    display: none;
+}
+
+.desktop-only {
+    display: block;
+}
+
 .svg-animation-section {
-    height: 200vh;
+    height: 250vh;
     /* Controla cuánto scroll dura la animación */
     position: relative;
     background-color: #ffffff;
@@ -502,8 +525,6 @@ body {
 .svg-sticky-container {
     position: sticky;
     top: 0;
-    /* width: 100vh;
-    height: 100vh; */
     display: flex;
     align-items: center;
     /* Mantenemos centrado, pero ajustaremos el SVG */
@@ -512,24 +533,76 @@ body {
 
 }
 
-#logo-animado {
+/* #logo-animado {
     /* width: 160%; */
     /* En móvil ocupa casi todo el ancho */
     /* max-width: none; */
     /* En desktop no crece infinitamente */
     /* height: auto; */
-    transform: translateY(-5%);
+    /* transform: translateY(-5%);
+} */ 
+
+#logo-animado-desktop {
+    /* Desktop */
+    width: 90%;
+    max-width: 1200px;
+    height: auto;
+}
+
+#logo-animado-mobile {
+    /* Mobile */
+    width: 85%;
+    /* No le des 100% para que respire por los lados */
+    height: auto;
+    max-height: 80vh;
+    /* Evita que sea más alto que la pantalla */
 }
 
 /* Estilos base para los trazos (transparentes al inicio) */
-.st3,
+/* .st3,
 .st4,
 .st5,
 .st6 {
     stroke-dasharray: 1;
     /* Se sobrescribirá con JS */
-    stroke-dashoffset: 1;
+    /* stroke-dashoffset: 1;
+} */ 
+
+.st3,
+.st4,
+.st5,
+.st6 {
+    fill: none;
+    transition: stroke-dashoffset 0.1s linear;
+    /* Suaviza el dibujo al hacer scroll */
 }
+
+@media (max-width: 767px) {
+    .mobile-only {
+        display: block;
+    }
+
+    .desktop-only {
+        display: none;
+    }
+
+    .svg-animado {
+        width: 100%;
+        /* Ocupa el ancho del móvil */
+        height: auto;
+    }
+
+    /* grosor para movil */
+        .mobile-only .st3,
+        .mobile-only .st4,
+        .mobile-only .st5,
+        .mobile-only .st6 {
+            stroke-width: 25px;
+            /* Aquí controlas el grosor de tu nuevo diseño móvil */
+        }
+}
+
+
 /* SECCIÓN PATH */
 
 /* FOOTER MÓVIL */
