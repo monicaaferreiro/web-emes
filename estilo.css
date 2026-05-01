@@ -129,6 +129,9 @@ body {
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(8px);
     transition: background 0.3s ease;
+    /* degradado del borde */
+    -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
 }
 
 /* --- OVERLAY MÓVIL --- */
@@ -537,59 +540,41 @@ body {
 }
 
 .svg-animation-section {
-    height: 250vh;
+    /* reducimos el scroll total */
+    height: 150vh;
     /* Controla cuánto scroll dura la animación */
     position: relative;
     background-color: #ffffff;
-    /* O el color de fondo que prefieras */
     margin-top: -10px;
+    margin-bottom: 0;
 }
 
 .svg-sticky-container {
     position: sticky;
     top: 0;
+    /* para que la animación no haga espacios en blanco al principio/final hay que definir altura para que funcione sticky */
+    height: 100vh;
     display: flex;
     align-items: center;
     /* Mantenemos centrado, pero ajustaremos el SVG */
     justify-content: center;
-    overflow: hidden;
+    /* con overflow:hidden se cortan los bordes */
+    overflow: visible;
 
 }
 
-/* #logo-animado {
-    /* width: 160%; */
-    /* En móvil ocupa casi todo el ancho */
-    /* max-width: none; */
-    /* En desktop no crece infinitamente */
-    /* height: auto; */
-    /* transform: translateY(-5%);
-} */ 
-
 #logo-animado-desktop {
     /* Desktop */
-    width: 90%;
-    max-width: 1200px;
+    width: 100%;
     height: auto;
 }
 
 #logo-animado-mobile {
     /* Mobile */
-    width: 85%;
+    width: 100%;
     /* No le des 100% para que respire por los lados */
     height: auto;
-    max-height: 80vh;
-    /* Evita que sea más alto que la pantalla */
 }
-
-/* Estilos base para los trazos (transparentes al inicio) */
-/* .st3,
-.st4,
-.st5,
-.st6 {
-    stroke-dasharray: 1;
-    /* Se sobrescribirá con JS */
-    /* stroke-dashoffset: 1;
-} */ 
 
 .st3,
 .st4,
@@ -600,7 +585,7 @@ body {
     /* Suaviza el dibujo al hacer scroll */
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     .mobile-only {
         display: block;
     }
@@ -625,6 +610,52 @@ body {
         }
 }
 
+/* capa texto+botón */
+.contact__header {
+    text-align: center;
+    padding: 0 var(--padding-movil);
+    display: flex;
+    flex-direction: column;
+}
+
+.contact__titulo1 {
+    font-family: var(--title-font-excon);
+    font-size: var(--text-size-title-excon);
+    font-weight: 400;
+}
+
+.contact__titulo2 {
+    font-family: var(--title-font-playfair);
+    font-size: var(--text-size-title-playfairdisplay);
+    font-style: italic;
+    font-weight: 700;
+}
+
+.contact-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    /* Un poco más abajo del centro */
+    text-align: center;
+    width: 100%;
+    opacity: 0;
+    /* Invisible al principio */
+    visibility: hidden;
+    transition: all 0.8s ease-out;
+    /* Animación suave de aparición */
+    pointer-events: none;
+    /* Evita que el botón se pueda clicar antes de tiempo */
+}
+
+/* Esta clase la añadiremos con JS cuando el scroll llegue al final */
+.contact-overlay.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%);
+    /* Sube a su posición central original */
+    pointer-events: auto;
+}
 
 /* SECCIÓN PATH */
 

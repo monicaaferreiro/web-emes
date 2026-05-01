@@ -1,4 +1,3 @@
-
 body {
     overflow-x: hidden;
     overflow-y: auto;
@@ -30,9 +29,10 @@ h2 span {
 /* --- SECCIÓN PRINCIPAL Y CUADRÍCULA --- */
 .projects-section {
     position: relative;
-    height: 400vh;
+    min-height: 100vh;
     /* Duración del scroll */
     width: 100%;
+    box-sizing: border-box;
 }
 
 .projects-grid {
@@ -43,9 +43,10 @@ h2 span {
     left: 0;
     width: 100%;
     /* En móvil, bajamos la altura para que no flote en el medio de la nada */
-    height: 65vh;
+    height: 100vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    overflow: hidden;
     gap: 15px;
     margin: 0 auto;
     /* Alineamos al inicio (arriba) en lugar de al centro */
@@ -56,9 +57,9 @@ h2 span {
 
 /* --- LAS COLUMNAS (LOS CARRILES) --- */
 .carousel-track {
-position: relative;
+    position: relative;
     /* En móvil, carriles más cortos para que el usuario entienda que hay más abajo */
-    height: 60vh;
+    height: 100vh;
     overflow: hidden;
     margin-top: 20px;
     /* Un pequeño respiro respecto al título */
@@ -127,71 +128,71 @@ position: relative;
 
 /* --- DESKTOP--- */
 @media (min-width: 768px) {
-.h2__header {
+    .h2__header {
         padding: clamp(100px, 6vh, 170px) 0 clamp(10px, 3vh, 40px) 0;
     }
-    
-.projects-grid {
+
+    .projects-grid {
         height: 90vh;
         /* Recuperamos altura en pantallas grandes */
         align-content: center;
         /* Aquí sí queda bien centrado verticalmente */
         padding: 0 var(--padding-desktop);
-        max-width: 90vw;
         gap: clamp(10px, 6vh, 50px);
     }
 
 
-.carousel-track {
-    height: 80vh;
-    /* Un poco más corto para que se vea el título arriba */
+    .carousel-track {
+        height: 80vh;
+        /* Un poco más corto para que se vea el título arriba */
     }
-/* Restauramos el efecto 3D solo para Desktop */
-.project-card {
-    perspective: 1000px;
-}
 
-.card-inner {
-    position: relative;
-    height: 100%;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-style: preserve-3d;
-}
+    /* Restauramos el efecto 3D solo para Desktop */
+    .project-card {
+        perspective: 1000px;
+    }
 
-/* .project-card:hover .card-inner {
+    .card-inner {
+        position: relative;
+        height: 100%;
+        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-style: preserve-3d;
+    }
+
+    /* .project-card:hover .card-inner {
     transform: rotateY(180deg);
 } */
 
-.card-front,
-.card-back {
-    position: absolute;
-    /* Volvemos a superponerlas */
-    top: 0;
-    left: 0;
-    height: 100%;
-    backface-visibility: hidden;
-}
+    .card-front,
+    .card-back {
+        position: absolute;
+        /* Volvemos a superponerlas */
+        top: 0;
+        left: 0;
+        height: 100%;
+        backface-visibility: hidden;
+    }
 
-.card-back {
-    background-color: var(--clr-corporativo-purple);
-    color: white;
-    transform: rotateY(180deg) !important;
-    display: flex;
-    /* Centrado para el efecto hover */
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 20px;
-}
+    .card-back {
+        background-color: var(--clr-corporativo-purple);
+        color: white;
+        transform: rotateY(180deg) !important;
+        display: flex;
+        /* Centrado para el efecto hover */
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 20px;
+    }
 
-/* Buscamos la línea que ya tenías y le añadimos el :not() */
-.projects-grid:not(.is-scrolling) .project-card:hover .card-inner {
-    transform: rotateY(180deg);
-}
+    /* Buscamos la línea que ya tenías y le añadimos el :not() */
+    .projects-grid:not(.is-scrolling) .project-card:hover .card-inner {
+        transform: rotateY(180deg);
+    }
 
-/* Opcional: suavizar el regreso cuando paramos el scroll */
-.card-inner {
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
+    /* Opcional: suavizar el regreso cuando paramos el scroll */
+    .card-inner {
+        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 }

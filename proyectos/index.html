@@ -460,55 +460,59 @@
 
         if (!leftList || !rightList || !section) return;
 
+        const adjustHeight = () => {
+            const isMobile = window.innerWidth < 768;
+
+            // 1. Calculamos la altura real de las tarjetas
+            const leftHeight = leftList.offsetHeight;
+            const rightHeight = rightList.offsetHeight;
+            const maxContentHeight = Math.max(leftHeight, rightHeight);
+
+            // 2. Definimos cuánto "aire" extra de scroll queremos.
+            // En móvil (3 listas de tarjetas aprox) un factor de 1.5 a 2 es ideal.
+            // En desktop (donde hay 400vh) el factor suele ser mayor.
+            const scrollFactor = isMobile ? 1.8 : 3.5;
+
+            // Aplicamos la altura calculada a la sección
+            section.style.height = `${maxContentHeight * scrollFactor}px`;
+        };
+
         const updateScroll = () => {
             const sectionRect = section.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
 
-            // Calculamos cuánto ha progresado el scroll en la sección
-            const totalScrollable = section.offsetHeight - window.innerHeight;
+            // El área total que el usuario puede scrollear dentro de la sección
+            const totalScrollable = section.offsetHeight - viewportHeight;
+
             let progress = -sectionRect.top / totalScrollable;
-
-            // Limitar progreso entre 0 y 1
             progress = Math.max(0, Math.min(1, progress));
 
-            // Altura de los contenedores (las ventanas de 70vh/80vh)
+            // El contenedor es el "carril" (carousel-track)
             const containerHeight = leftList.parentElement.offsetHeight;
 
-            // Cuánto tiene que recorrer cada lista (su altura total menos lo que se ve)
+            // Recorrido total: lo que mide la lista menos lo que ya se ve en el carril
             const leftTravel = leftList.offsetHeight - containerHeight;
             const rightTravel = rightList.offsetHeight - containerHeight;
 
-            // Movimiento columna izquierda (de arriba hacia abajo)
-            const moveLeft = progress * leftTravel;
-            leftList.style.transform = `translateY(-${moveLeft}px)`;
-
-            // Movimiento columna derecha (de abajo hacia arriba - efecto espejo)
-            // Empezamos al final de la lista y subimos
-            const moveRight = (1 - progress) * rightTravel;
-            rightList.style.transform = `translateY(-${moveRight}px)`;
-
-            requestAnimationFrame(updateScroll);
+            // Aplicamos los movimientos opuestos
+            leftList.style.transform = `translateY(-${progress * leftTravel}px)`;
+            rightList.style.transform = `translateY(-${(1 - progress) * rightTravel}px)`;
         };
 
+        // Inicialización
+        setTimeout(adjustHeight, 100); // Pequeño delay para que las imágenes carguen y den la altura real
+        window.addEventListener('resize', adjustHeight);
         window.addEventListener('scroll', updateScroll);
-        // Ejecución inicial
-        updateScroll();
-    });
 
-    let isScrolling;
-        const projectsGrid = document.querySelector('.projects-grid');
-
+        // Para el efecto de bloqueo de giro que ya tenías
+        let isScrolling;
         window.addEventListener('scroll', () => {
-            // 1. Añadimos la clase que bloquea el giro
-            projectsGrid.classList.add('is-scrolling');
-
-            // 2. Limpiamos el timeout para que no se quite la clase hasta que pares
+            const grid = document.querySelector('.projects-grid');
+            grid.classList.add('is-scrolling');
             window.clearTimeout(isScrolling);
-
-            // 3. Cuando pasan 150ms sin scroll, quitamos la clase
-            isScrolling = setTimeout(() => {
-                projectsGrid.classList.remove('is-scrolling');
-            }, 150);
+            isScrolling = setTimeout(() => grid.classList.remove('is-scrolling'), 150);
         });
+    });
 </script>
 
 </body>
