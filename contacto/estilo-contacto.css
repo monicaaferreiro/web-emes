@@ -38,10 +38,13 @@ body {
     overflow-x: hidden;
 }
 
+header {
+    padding: clamp(80px, 7vh, 180px) 0 clamp(10px, 3vh, 40px) 0;
+}
+
 /* --- INTRODUCCIÓN --- */
 .contacto-intro {
     text-align: center;
-    padding: var(--padding-contacto);
     margin-bottom: 20px;
 }
 
@@ -51,11 +54,6 @@ body {
     font-weight: 400;
 }
 
-.serif-title {
-    font-family: var(--title-font-playfair);
-    font-style: italic;
-    font-weight: 400;
-}
 
 /* --- FORMULARIO (ESTILO VISUAL) --- */
 .contacto-form {
@@ -79,7 +77,6 @@ body {
 /* Los labels están arriba, como en el diseño */
 .form-group label {
     display: block;
-    color: var(--text-color-contacto);
     font-size: var(--text-size-label);
     margin-bottom: 5px;
     font-weight: 400;
@@ -92,12 +89,18 @@ body {
     background: transparent;
     border: none;
     padding: 10px 0;
-    color: var(--form-input-color);
     font-family: var(--text-font-inter);
     font-size: 16px;
     font-weight: 300;
     line-height: 1.2;
 }
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+}
+
+
 
 /* El textarea se expandirá si es necesario */
 .form-group textarea {
@@ -108,20 +111,8 @@ body {
 
 /* Botón "Enviar" */
 .form-actions {
-    text-align: right;
+    text-align: center;
     margin-bottom: 30px;
-}
-
-.btn-enviar {
-    background: transparent;
-    border: none;
-    color: #333333;
-    font-family: var(--title-font-playfair);
-    font-style: italic;
-    font-size: 20px;
-    text-decoration: underline;
-    cursor: pointer;
-    padding: 0;
 }
 
 /* Política de privacidad y checkbox */
@@ -152,8 +143,8 @@ body {
 .politica-group label {
     color: #333333;
     font-size: 14px;
-    font-weight: 300;
     line-height: 1.4;
+    font-family: var(--text-font-inter);
 }
 
 .politica-group a {
@@ -173,17 +164,59 @@ body {
     border: 0;
 }
 
+
+/* mensaje thank you */
+.contacto-section.is-success {
+    display: flex !important;
+    /* Cambiamos el Grid por Flex para centrar */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* Ocupa todo el alto */
+    text-align: center;
+}
+
+/* Ocultamos todo lo que no sea el mensaje de agradecimiento */
+.is-success .contacto-intro,
+.is-success .contacto-form {
+    display: none !important;
+}
+
+.thank-you {
+    padding: var(--padding-contacto);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+}
+
+/* Clase que activaremos con JS */
+.thank-you.is-visible {
+    display: block !important;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.thank-you h2 {
+    margin-bottom: 20px;
+}
+
+.thank-you p {
+    font-family: var(--text-font-inter);
+    font-size: var(--text-size-text);
+    align-items: center;
+}
+
+
+
 /* --- MEDIA QUERY PARA ESCRITORIO (>= 768px) --- */
 @media (min-width: 768px) {
 
     .contacto-section {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        /* Dos columnas igual que antes */
-        height: 100vh;
-        overflow: hidden;
-        /* Importante para la animación de entrada */
-    }
+        min-height: 100vh;
+        }
 
     /* Estilos para el texto de introducción en escritorio */
     .contacto-intro {
@@ -191,19 +224,16 @@ body {
         justify-content: center;
         align-items: center;
         padding-right: 10vw;
-        /* Espacio para que no se pegue al formulario */
-        text-align: right;
+        text-align: center;
         opacity: 0;
-        /* Empieza invisible */
         transform: translateX(-50px);
-        /* Empieza desplazado a la izquierda */
         animation: fadeInIntro 1s ease forwards;
-        /* Pequeña animación de entrada al cargar */
+        padding-right: 0;
     }
 
     .contacto-intro h2 {
         line-height: 1.1;
-        max-width: 500px;
+        max-width: 600px;
     }
 
     /* Estilos para la palabra "hablar" clickable */

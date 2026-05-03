@@ -13,7 +13,7 @@
     --text-size-title-excon: clamp(1.125rem, 0.374rem + 3.056vw, 3.125rem);
     --text-size-title-playfairdisplay: clamp(1.5rem, 0.163rem + 5.443vw, 5.0625rem);
     --text-size-title-playfairdisplay-entre-excon: clamp(1.125rem, 0.374rem + 3.056vw, 3.125rem);
-    --text-size-copyright: clamp(1rem, 0.906rem + 0.382vw, 1.25rem);
+    --text-size-copyright: clamp(1rem, 3%, 1.25rem);
 
     --padding-movil: 4vw; /* Límites retícula */
     --padding-desktop: 2vw;
@@ -205,7 +205,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: clamp(50px, 8vh, 80px);
+    gap: clamp(10px, 2vh, 30px);
 }
 
 .logo-mm-contorno__footer {
@@ -1060,7 +1060,11 @@ body {
             gap: 25px;
             align-items: center;
         }
-    
+        
+        .size-icons {
+            width: clamp(20px, 6vw, 35px);
+            height: clamp(20px, 6vw, 35px);
+        }
         .social-icons-desktop a {
             /* Necesario para que align-items funcione en el enlace y el icono no tenga espacio extra debajo (baseline) */
             display: flex;
@@ -1072,7 +1076,7 @@ body {
             opacity: 0.6;
         }
 
-        .social-icons-desktop img {
+        .social-icons-desktop svg {
             width: clamp(20px, 6vw, 35px);
             height: clamp(20px, 6vw, 35px);
             }
