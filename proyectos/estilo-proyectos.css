@@ -3,6 +3,10 @@ body {
     overflow-y: auto;
 }
 
+a {
+    text-decoration: none;
+    color: var(--text-font-inter);
+}
 
 h2 {
     font-family: var(--title-font-excon);
@@ -14,12 +18,6 @@ h2 span {
 }
 
 .h2__header {
-    /* text-align: center;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    flex-direction: column; */
     grid-column: 1 / span 2;
     text-align: center;
     padding: clamp(80px, 7vh, 180px) 0 clamp(10px, 3vh, 40px) 0;
@@ -74,7 +72,6 @@ h2 span {
     will-change: transform;
 }
 
-/* --- LAS TARJETAS (CARDS) - AQUÍ ESTÁ TU DISEÑO 3D --- */
 .project-card {
     width: calc(100% - (var(--card-margin) * 2));
     aspect-ratio: 1 / 1;
@@ -96,17 +93,11 @@ h2 span {
 .card-back {
     position: relative;
     width: 100%;
-    /* height: 100%; */
     backface-visibility: visible;
     transform: none !important;
-    /* border-radius: var(--card-border-radius);
-    overflow: hidden; */
 }
 
-/* .card-front {
-    background-color: #f0f0f0;
-    display: block;
-} */
+
 
 .card-img {
     width: 100%;
