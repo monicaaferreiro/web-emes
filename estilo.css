@@ -6,19 +6,19 @@
     --clr-black: hsl(0, 0%, 0%);
     /* para darle altura fija al nav */
     --nav-height: clamp(80px, 10vh, 80px);
-    --title-font-playfair: 'Playfair Display', serif; itlic
+    --title-font-playfair: 'Playfair Display', serif; 
     --title-font-excon: 'Excon', sans-serif;
     --text-font-inter: 'Inter', sans-serif;
-    --text-size-text: clamp(1.125rem, 0.863rem + 1.066vw, 1.1625rem);
-    --text-size-title-excon: clamp(1.125rem, 0.374rem + 3.056vw, 3.125rem);
-    --text-size-title-playfairdisplay: clamp(1.5rem, 0.163rem + 5.443vw, 5.0625rem);
+    --text-size-text: clamp(1rem, 0.763rem + 1vw, 1.5rem);
+    --text-size-title-excon: clamp(1.325rem, 0.374rem + 3.056vw, 3rem);
+    --text-size-title-playfairdisplay: clamp(1.8rem, 0.163rem + 5.443vw, 4.9rem);
     --text-size-title-playfairdisplay-entre-excon: clamp(1.125rem, 0.374rem + 3.056vw, 3.125rem);
     --text-size-copyright: clamp(1rem, 3%, 1.25rem);
 
     --padding-movil: 4vw; /* Límites retícula */
     --padding-desktop: 2vw;
     --padding-secciones: clamp(30px, 8vh, 40px); /* padding arriba-abajo entre secciones */
-    --gap-secciones: clamp(10px, 6vh, 60px); /* espacio entre los contenidos dentro de las secciones */
+    --gap-secciones: clamp(10px, 5vh, 40px); /* espacio entre los contenidos dentro de las secciones */
 }
 
 * {
@@ -61,10 +61,17 @@
 .titulo2-playfair {
     text-align: center;
     font-family: var(--title-font-playfair);
-        font-size: var(--text-size-title-playfairdisplay);
-        font-style: italic;
-        font-weight: 700;
+    font-size: var(--text-size-title-playfairdisplay);
+    font-style: italic;
+    font-weight: 700;
+    margin-top: clamp(-4px, -1vh, -2px);
 }
+
+.vertical-align{
+    vertical-align: middle;
+}
+
+
 
 body {
     font-family: var(--text-font-inter);
@@ -96,8 +103,10 @@ body {
     z-index: 1000;
 }
 
-.logo-img {
+.emes-logo-svg {
     height: clamp(35px, 5vw, 50px);
+    display: block;
+    vertical-align: middle;
 }
 
 /* Ocultamos el checkbox físicamente */
@@ -159,19 +168,11 @@ body {
 
 .menu__overlay_header {
     padding: var(--padding-movil);
-    position: absolute; /* ← desacopla el header también */
     display: flex;
     align-items: center;
-    height: var(--nav-height);
-    /* misma altura exacta que el nav */
-    /* así el logo queda visualmente a la misma línea que la X */
     width: 100%;
 }
 
-.menu__overlay_emes-logo {
-    height: clamp(35px, 5vw, 50px);
-    display: block;
-}
 
 .menu__overlay_nav {
     flex: 1;
@@ -198,14 +199,13 @@ body {
 }
 
 .menu__overlay_footer {
-    position: absolute; /* ← se desacopla del flujo flex */
-    bottom: 5vh; /* ← pegado al fondo respetando el padding del overlay */
     left: 0;
     right: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: clamp(10px, 2vh, 30px);
+    padding-bottom: 5vh;
 }
 
 .logo-mm-contorno__footer {
@@ -320,20 +320,8 @@ body {
 }
 
 .servicios__header {
-    text-align: right;
-}
-
-.servicios__titulo1 {
-    font-family: var(--title-font-excon);
-    font-size: var(--text-size-title-excon);
-    font-weight: 400;
-}
-
-.servicios__titulo2 {
-    font-family: var(--title-font-playfair);
-    font-size: var(--text-size-title-playfairdisplay);
-    font-style: italic;
-    font-weight: 700;
+    text-align: center;
+    padding: 0 var(--padding-movil);
 }
 
 .servicios__lista {
@@ -437,21 +425,8 @@ body {
     padding: 0 var(--padding-movil);
 }
 
-.proyectos__titulo1 {
-    font-family: var(--title-font-excon);
-    font-size: var(--text-size-title-excon);
-    font-weight: 400;
-}
-
-.proyectos__titulo2 {
-    font-family: var(--title-font-playfair);
-    font-size: var(--text-size-title-playfairdisplay);
-    font-style: italic;
-    font-weight: 700;
-}
-
 /* position:relative para anclar las flechas absolutas.
-   overflow:hidden recorta lo que se sale del slider */
+overflow:hidden recorta lo que se sale del slider */
 .proyectos__slider-wrapper {
     position: relative;
     width: 100%;
@@ -476,7 +451,7 @@ body {
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    width: clamp(260px, 60vw, 320px);
+    width: clamp(200px, 45vw, 260px);
     /* espacio entre imagen y texto */
 }
 
@@ -503,12 +478,12 @@ body {
 .proyecto__info {
     display: flex;
     flex-direction: column;
-    padding: clamp(8px, 1.5vw, 16px) var(--padding-movil) 0;
+    padding: clamp(6px, 1vw, 10px) var(--padding-movil) 0;
     gap: 10px;
 }
 .proyecto__nombre {
     font-family: var(--text-font-inter);
-    font-size: clamp(1.2rem, 5vw, 1.5rem);
+    font-size: clamp(1.2rem, 3vw, 1.7rem);
     font-weight: 700;
     color: var(--clr-black);
 }
@@ -646,6 +621,10 @@ body {
     /* Animación suave de aparición */
     pointer-events: none;
     /* Evita que el botón se pueda clicar antes de tiempo */
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-secciones);
+    
 }
 
 /* Esta clase la añadiremos con JS cuando el scroll llegue al final */
@@ -725,6 +704,12 @@ body {
 /* Escondido en móvil */
 @media (min-width: 768px) {
 
+/* CLASES UTILITARIAS DESKTOP */
+.titulo2-playfair {
+        margin-top: clamp(-20px, -4vh, -8px);
+    }
+
+
     .nav__burguer,
     .menu__overlay {
         display: none;
@@ -800,7 +785,7 @@ body {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: auto auto;
-        gap: clamp(20px, 3vw, 40px);
+        gap: clamp(20px, 8vw, 60px);
         align-items: center;
     }
 
@@ -849,10 +834,10 @@ body {
 
     .servicio__icono--vertical {
             width: auto;
-            height: clamp(100px, 30vw, 450px);
+            height: clamp(90px, 29vw, 450px);
         }
     
-        .servicio__icono--vertical svg {
+    .servicio__icono--vertical svg {
             width: auto;
             height: 100%;
         }
@@ -875,6 +860,13 @@ body {
         margin-bottom: 0;
     }
 
+    .servicio__cta {
+        font-size: clamp(0.9rem, 2vw, 1.6rem);
+        }
+    
+    .servicio__descripcion {
+        font-size: clamp(0.9rem, 1.8vw, 1.3rem);
+        }
     /* cta y descripcion ocultos por defecto, aparecen al hover */
     .servicio__cta,
     .servicio__descripcion {
@@ -961,6 +953,7 @@ body {
 .proyectos__flecha--next {
     right: var(--padding-desktop);
 }
+
 /* SECCION PROYECTOS DESKTOP */
 
 

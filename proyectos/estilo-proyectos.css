@@ -129,7 +129,7 @@ h2 span {
         align-content: center;
         /* Aquí sí queda bien centrado verticalmente */
         padding: 0 var(--padding-desktop);
-        gap: clamp(10px, 6vh, 50px);
+        gap: clamp(10px, 4vh, 50px);
     }
 
 

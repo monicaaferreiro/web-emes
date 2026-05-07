@@ -236,37 +236,6 @@ header {
         max-width: 600px;
     }
 
-    /* Estilos para la palabra "hablar" clickable */
-    .clickable {
-        cursor: pointer;
-        position: relative;
-    }
-
-    /* Pequeña línea que aparece al pasar el ratón por encima de "hablar" */
-    .clickable::after {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 2px;
-        bottom: -5px;
-        left: 0;
-        background-color: var(--clr-black);
-        transition: width 0.3s ease;
-    }
-
-    .clickable:hover::after {
-        width: 100%;
-    }
-
-    /* Estilo para cuando "hablar" está activo (el formulario está visible) */
-    .serif-title.clickable.active {
-        color: var(--clr-corporativo-purple);
-    }
-
-    .clickable.active::after {
-        background-color: var(--clr-corporativo-purple);
-    }
-
 
     /* FORMULARIO EN ESCRITORIO (ANIMACIÓN DE ENTRADA) */
     .contacto-form {
@@ -277,33 +246,17 @@ header {
         width: 100%;
         padding-left: 5vw;
         /* Espacio para que no se pegue al texto de intro */
-
-        /* ESTADO INICIAL (OCULTO) */
-        opacity: 0;
-        pointer-events: none;
-        /* No permite clicks mientras está oculto */
-        transform: translateX(100px);
-        /* Oculto 100px a la derecha */
-        transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: translateX(50px);
+            animation: fadeInIntro 1s ease forwards;
     }
 
-    /* ESTADO VISIBLE (CUANDO JS AÑADE LA CLASE) */
-    .contacto-form.is-visible {
-        opacity: 1;
-        pointer-events: auto;
-        /* Reactivamos los clicks */
-        transform: translateX(0);
-        /* Vuelve a su posición original */
-    }
+   
 
     /* Ajustes menores para escritorio */
     .form-group label {
         font-size: 16px;
     }
 
-    .btn-enviar {
-        font-size: 24px;
-    }
 
     /* Animaciones fadeIn */
     @keyframes fadeInIntro {
