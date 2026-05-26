@@ -42,8 +42,79 @@ header {
     padding: clamp(80px, 7vh, 180px) 0 clamp(10px, 3vh, 40px) 0;
 }
 
+
+/* Infografía */
+.contacto-infografia {
+    padding-bottom: var(--padding-secciones);
+}
+
+
+.steps-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+/* --- Animaciones Base (Ocultos por defecto) --- */
+/* --- Animaciones Base (Ocultos por defecto) --- */
+.step {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.step.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Líneas Móvil (Verticales) --- */
+.line-container {
+    width: 1.5px;
+    height: 120px;
+    margin: 20px 0;
+    position: relative;
+}
+
+.line-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    /* Empieza en 0 */
+    background-color: black;
+    transition: height 1s ease-in-out;
+}
+
+/* La clase visible dispara la animación de "pintado" */
+.line-container.visible .line-fill {
+    height: 100%;
+}
+
+.step-number {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 3rem;
+    font-style: italic;
+    font-weight: bold;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.step-text {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+
 /* --- INTRODUCCIÓN --- */
 .contacto-intro {
+    display: none;
     text-align: center;
     margin-bottom: 20px;
 }
@@ -212,6 +283,76 @@ header {
 /* --- MEDIA QUERY PARA ESCRITORIO (>= 768px) --- */
 @media (min-width: 768px) {
 
+    /* infografía */
+    .contacto-infografia {
+        padding: var(--padding-secciones) 0;
+    }
+
+        .title-info {
+            padding-top: var(--nav-height);
+            padding-bottom: 4rem;
+        }
+        .steps-container {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding-bottom: var(--padding-secciones);
+        }
+    
+        .step {
+            flex: 1;
+            padding: 0 15px;
+            position: relative;
+            z-index: 2;
+            /* Para que el número quede por encima de la línea si se cruzan */
+        }
+    
+        /* --- Transformamos las líneas a Horizontales --- */
+        .line-container {
+            position: absolute;
+            height: 2px;
+            /* La línea ocupa aprox el espacio entre los centros de las columnas */
+            width: calc(33.33% - 60px);
+            top: 35px;
+            /* Alinear con el centro visual de los números */
+            margin: 0;
+            z-index: 1;
+        }
+    
+        /* Posicionamos matemáticamente las líneas entre los bloques */
+        .line-1-2 {
+            left: calc(16.66% + 30px);
+        }
+    
+        .line-2-3 {
+            left: calc(50% + 30px);
+        }
+    
+        .line-fill {
+            width: 0%;
+            /* En horizontal, animamos el ancho */
+            height: 100%;
+            transition: width 1s ease-in-out;
+        }
+    
+        .line-container.visible .line-fill {
+            width: 100%;
+            height: 100%;
+        }
+
+        .line-container.visible .line-fill {
+                    width: 100% !important;
+                    transition-delay: 0s !important;
+                }
+        
+        .step.visible {
+                    transition-delay: 0s !important;
+                }
+
+
+
     .contacto-section {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -227,7 +368,7 @@ header {
         text-align: center;
         opacity: 0;
         transform: translateX(-50px);
-        animation: fadeInIntro 1s ease forwards;
+        /* animation: fadeInIntro 1s ease forwards; */
         padding-right: 0;
     }
 
@@ -245,13 +386,19 @@ header {
         max-width: none;
         width: 100%;
         padding-left: 5vw;
+        opacity: 0;
         /* Espacio para que no se pegue al texto de intro */
         transform: translateX(50px);
-            animation: fadeInIntro 1s ease forwards;
+            /* animation: fadeInIntro 1s ease forwards; */
+    }
+
+    /* se controla con el JS */
+    .contacto-intro.visible,
+    .contacto-form.visible {
+        animation: fadeInIntro 1s ease forwards;
     }
 
    
-
     /* Ajustes menores para escritorio */
     .form-group label {
         font-size: 16px;

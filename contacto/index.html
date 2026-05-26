@@ -148,6 +148,37 @@
     
         </nav>
     </header>
+
+    <section id="contacto-idea" class="contacto-infografia">
+        <div class="title-info">
+            <h2 class="titulo1-excon">¿Tienes una <span class="titulo2-playfair">idea</span> en mente?</h2>
+        </div>
+    
+        <div class="steps-container">
+            <div class="step step-1">
+                <div class="step-number">1</div>
+                <p class="step-text">Cuéntanosla<br>rellenando el<br>formulario</p>
+            </div>
+    
+            <div class="line-container line-1-2">
+                <div class="line-fill"></div>
+            </div>
+    
+            <div class="step step-2">
+                <div class="step-number">2</div>
+                <p class="step-text">El equipo de Emes<br>contacta contigo</p>
+            </div>
+    
+            <div class="line-container line-2-3">
+                <div class="line-fill"></div>
+            </div>
+    
+            <div class="step step-3">
+                <div class="step-number">3</div>
+                <p class="step-text">¡Manos a la obra!<br>Vamos a hacer<br>realidad tu idea</p>
+            </div>
+        </div>
+    </section>
     
     <main class="contacto-section">
         <div class="contacto-intro">
@@ -371,6 +402,114 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
+            //infografía
+            // Comprobamos si estamos en versión móvil (menos de 768px de ancho)
+            const isMobile = window.matchMedia("(max-width: 767px)").matches;
+
+           if (isMobile) {
+                // LÓGICA MÓVIL: "Cola Global en Tiempo Real"
+                const observerOptions = {
+                    root: null,
+                    rootMargin: "0px 0px -15% 0px",
+                    threshold: 0.1
+                };
+
+                // Esta variable recordará cuándo termina de dibujarse el ÚLTIMO elemento en curso
+                let animationQueueEnd = 0;
+
+                const scrollObserver = new IntersectionObserver((entries, observer) => {
+                    const intersecting = entries.filter(entry => entry.isIntersecting);
+                    if (intersecting.length === 0) return;
+
+                    // Ordenamos de arriba a abajo por si entran varios a la vez
+                    intersecting.sort((a, b) => a.target.getBoundingClientRect().top - b.target.getBoundingClientRect().top);
+
+                    const now = Date.now();
+
+                    // Comprobamos la cola: 
+                    // Si el final de la cola ya pasó, empezamos YA (now). 
+                    // Si el final de la cola es en el futuro, nos ponemos a esperar detrás.
+                    let currentStartTime = Math.max(now, animationQueueEnd);
+
+                    intersecting.forEach(entry => {
+                        const el = entry.target;
+
+                        // Cuánto tiene que esperar este elemento exactamente
+                        const delay = currentStartTime - now;
+
+                        if (delay <= 0) {
+                            el.classList.add("visible");
+                        } else {
+                            setTimeout(() => {
+                                el.classList.add("visible");
+                            }, delay);
+                        }
+
+                        // Calculamos el tiempo para el SIGUIENTE elemento.
+                        // La línea tarda 1s (1000ms) en dibujarse por CSS. El texto le damos 0.6s (600ms).
+                        if (el.classList.contains("line-container")) {
+                            currentStartTime += 1000;
+                        } else {
+                            currentStartTime += 600;
+                        }
+
+                        // Dejamos de observar
+                        observer.unobserve(el);
+                    });
+
+                    // Actualizamos la variable global para el próximo scroll
+                    animationQueueEnd = currentStartTime;
+
+                }, observerOptions);
+
+                // Observamos todo
+                const elementsToAnimate = document.querySelectorAll(".step, .line-container");
+                elementsToAnimate.forEach(el => scrollObserver.observe(el));
+
+            } else {
+            // LÓGICA DESKTOP (Queda igual)
+                const section = document.querySelector(".contacto-infografia");
+
+                const desktopObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            playDesktopSequence();
+                            observer.unobserve(entry.target); // Solo se reproduce una vez
+                        }
+                    });
+                }, { threshold: 0.3 }); // Se dispara cuando se ve el 30% de la sección
+
+                desktopObserver.observe(section);
+
+                function playDesktopSequence() {
+                    // Orden exacto en el que deben aparecer los elementos
+                    const sequence = [
+                        document.querySelector(".step-1"),
+                        document.querySelector(".line-1-2"),
+                        document.querySelector(".step-2"),
+                        document.querySelector(".line-2-3"),
+                        document.querySelector(".step-3")
+                    ];
+
+                    let delay = 0;
+
+                    sequence.forEach((el, index) => {
+                        setTimeout(() => {
+                            el.classList.add("visible");
+                        }, delay);
+
+                        // Ajustamos los tiempos: Las líneas tardan 1s en pintarse, los textos 0.6s
+                        if (el.classList.contains("line-container")) {
+                            delay += 1000;
+                        } else {
+                            delay += 600;
+                        }
+                    });
+                }
+            }
+
+            //formulario
+
             // 1. Seleccionamos los elementos principales
             const contactoForm = document.getElementById('contacto-form'); const mainSection = document.querySelector('.contacto-section');
             const thankYouMessage = document.getElementById('thank-you-message');
@@ -412,6 +551,27 @@
                 }
             });
 
+            // --- ANIMACIÓN AL SCROLLEAR HACIA EL FORMULARIO ---
+            const formObserverOptions = {
+                root: null,
+                rootMargin: "0px 0px -60% 0px", // Se dispara cuando entran un 60% en pantalla
+                threshold: 0.1
+            };
+
+            const formObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Le añadimos la clase que dispara el CSS
+                        entry.target.classList.add('visible');
+                        // Dejamos de observar para que la animación solo ocurra una vez
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, formObserverOptions);
+
+            // Seleccionamos la intro y el formulario para observarlos
+            const formElementsToAnimate = document.querySelectorAll('.contacto-intro, .contacto-form');
+            formElementsToAnimate.forEach(el => formObserver.observe(el));
         });
     </script>
 </body>
