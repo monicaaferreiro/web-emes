@@ -19,6 +19,7 @@
     --padding-desktop: 2vw;
     --padding-secciones: clamp(30px, 8vh, 40px); /* padding arriba-abajo entre secciones */
     --gap-secciones: clamp(10px, 5vh, 40px); /* espacio entre los contenidos dentro de las secciones */
+    --text-size-text-2: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
 }
 
 * {
@@ -71,11 +72,22 @@
     vertical-align: middle;
 }
 
+.mobile {
+    display: block;
+}
+
+.desktop {
+    display: none;
+}
 
 
 body {
     font-family: var(--text-font-inter);
     overflow-x: hidden;
+}
+
+.text-size-2 {
+    font-size: var(--text-size-text-2);
 }
 
 /* Ocultar el texto del logo pero mantenerlo para SEO */
@@ -708,6 +720,14 @@ overflow:hidden recorta lo que se sale del slider */
 .titulo2-playfair {
         margin-top: clamp(-20px, -4vh, -8px);
     }
+
+.mobile {
+            display: none;
+        }
+    
+        .desktop {
+            display: block;
+        }
 
 
     .nav__burguer,
