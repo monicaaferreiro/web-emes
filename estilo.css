@@ -72,6 +72,12 @@
     vertical-align: middle;
 }
 
+.contenido-pag {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-secciones);
+}
+
 .mobile {
     display: block;
 }
@@ -183,6 +189,10 @@ body {
     display: flex;
     align-items: center;
     width: 100%;
+}
+
+.menu__overlay_header .cls-1 {
+    stroke-width: 1.8px;
 }
 
 
@@ -324,8 +334,19 @@ body {
 /* IMAGEN HERO */
 
 /* SERVICIOS */
+.titulo-logo-emes {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.titulo-logo-emes svg {
+    height: calc(var(--text-size-title-playfairdisplay) * 0.7);
+    width: auto;
+}
+
 .seccion-servicios {
-    padding: var(--padding-secciones) var(--padding-movil);
+    padding: var(--padding-secciones) var(--padding-movil) 0; 
     display: flex;
     flex-direction: column;
     gap: var(--gap-secciones);
@@ -425,7 +446,6 @@ body {
 /* SECCIÓN PROYECTOS */
 
 .seccion-proyectos {
-    padding: var(--padding-secciones) 0;
     display: flex;
     flex-direction: column;
     gap: var(--gap-secciones);
@@ -718,7 +738,7 @@ overflow:hidden recorta lo que se sale del slider */
 
 /* CLASES UTILITARIAS DESKTOP */
 .titulo2-playfair {
-        margin-top: clamp(-20px, -4vh, -8px);
+        margin-top: clamp(-12px, -4vh, -9px);
     }
 
 .mobile {
@@ -784,12 +804,19 @@ overflow:hidden recorta lo que se sale del slider */
         padding: 40px 2vw; 
         }
 
-    /* transparencia header desactivada*/
-    .nav--scrolled {
-            background: transparent;
-            backdrop-filter: none;
-            -webkit-backdrop-filter: none;
-        }
+/* La otra opción para el header  sería simplemente no usar blur en desktop y en cambio hacer que los textos del menú tengan siempre legibilidad,
+por ejemplo añadiendo una sombra suave al texto */
+   /* .nav--scrolled {
+       background: transparent;
+       backdrop-filter: none;
+       -webkit-backdrop-filter: none;
+   }
+
+   .nav--scrolled .header__menu_list a,
+   .nav--scrolled .emes-logo-svg .logo-emes {
+       filter: drop-shadow(0px 0px 6px rgba(255, 255, 255, 0.8));
+   } */
+
 
     .hero__img--mobile {
         display: none;
@@ -800,13 +827,17 @@ overflow:hidden recorta lo que se sale del slider */
     }
 
 /* SECCIÓN SERVICIOS DESKTOP */
+.seccion-servicios {
+    padding: var(--padding-secciones) var(--padding-desktop);
+}
 
     .servicios__lista {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: auto auto;
-        gap: clamp(20px, 8vw, 60px);
-        align-items: center;
+        gap: clamp(10px, 1.8vw, 15px);
+        align-items: start;
+        container-type: inline-size;
     }
 
     .servicio:nth-child(1) {
@@ -843,7 +874,7 @@ overflow:hidden recorta lo que se sale del slider */
     }
 
     .servicio__icono {
-        width: 100%;
+    width: clamp(150px, 26cqi, 320px);
     }
 
     .servicio__icono svg {
@@ -854,7 +885,8 @@ overflow:hidden recorta lo que se sale del slider */
 
     .servicio__icono--vertical {
             width: auto;
-            height: clamp(90px, 29vw, 450px);
+            height: clamp(60px, 23cqi, 240px);
+
         }
     
     .servicio__icono--vertical svg {
@@ -876,16 +908,16 @@ overflow:hidden recorta lo que se sale del slider */
         opacity: 1;
         transform: none;
         transition: none;
-        font-size: clamp(1.5rem, 3vw, 2.5rem);
+        font-size: clamp(1.7rem, 2.5vw, 2.3rem);
         margin-bottom: 0;
     }
 
     .servicio__cta {
-        font-size: clamp(0.9rem, 2vw, 1.6rem);
+        font-size: clamp(0.7rem, 1.8vw, 1.3rem);
         }
     
     .servicio__descripcion {
-        font-size: clamp(0.9rem, 1.8vw, 1.3rem);
+        font-size: clamp(0.7rem, 1.6vw, 1.1rem);
         }
     /* cta y descripcion ocultos por defecto, aparecen al hover */
     .servicio__cta,
