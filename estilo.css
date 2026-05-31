@@ -20,6 +20,7 @@
     --padding-secciones: clamp(30px, 8vh, 40px); /* padding arriba-abajo entre secciones */
     --gap-secciones: clamp(10px, 5vh, 40px); /* espacio entre los contenidos dentro de las secciones */
     --text-size-text-2: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+    --text-size-info_card:clamp(1rem, 0.85rem + 0.5vw, 1.25rem);
 }
 
 * {
